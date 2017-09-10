@@ -85,6 +85,8 @@
 \usepackage[backend=bibtex]{biblatex}
 \addbibresource{phd-defense-report.bib}
 
+\newcommand{\chameleon}{\textsc{Chameleon}}
+
 \newcommand{\term}[1]{\textcolor{blue}{\scriptsize (#1)}}
 \newcommand{\set}[1]{\{#1\}}
 \newcommand{\question}[1]{\textcolor{red}{\centerline{#1}}}
@@ -95,6 +97,7 @@
 \newcommand{\mathbfblue}[1]{\textcolor{blue}{$\mathbf{#1}$}}
 
 \newcommand{\papertitle}{Parameterized and Runtime-tunable Snapshot Isolation in Distributed Transactional Key-value Stores}
+\newcommand{\shortpapertitle}{Parameterized and Runtime-tunable Snapshot Isolation}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
 \title[RVSI]{\papertitle}
 \subtitle{(SRDS 2017, HongKong)}
@@ -106,19 +109,11 @@
 
 \AtBeginSection[]{
   \begin{frame}[noframenumbering, plain]
-    \frametitle{\papertitle}
+    \frametitle{\shortpapertitle}
+    \centerline{\underline{RVSI: Relaxed Version Snapshot Isolation}}
     \tableofcontents[currentsection, sectionstyle=show/shaded, subsectionstyle=hide/hide/hide]
   \end{frame}
 }
-
-% Delete this, if you do not want the table of contents to pop up 
-% at the beginning of each subsection:
-% \AtBeginSubsection[]{
-%   \begin{frame}[noframenumbering, plain]
-%     \frametitle{\papertitle}
-%       \tableofcontents[currentsection, sectionstyle=show/shaded, subsectionstyle=show/shaded/hide]
-%   \end{frame}
-% }
 %%%%%%%%%%%%%%%%%%%%
 \begin{document}
 
@@ -136,14 +131,13 @@
 \maketitle
 
 \begin{frame}[noframenumbering, plain]
-  \frametitle{\papertitle}
+  \frametitle{\shortpapertitle}
+  \centerline{\underline{RVSI: Relaxed Version Snapshot Isolation}}
   \tableofcontents[currentsection, sectionstyle=show, subsectionstyle=show/show/hide]
 \end{frame}
 
 \input{sections/intro}
-\input{sections/si}
 \input{sections/rvsi}
-\input{sections/chameleon}
 \input{sections/protocol}
 \input{sections/experiment}
 \input{sections/related-work}
