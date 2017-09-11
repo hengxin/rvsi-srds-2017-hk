@@ -1,0 +1,92 @@
+\usepackage{xeCJK}
+% \usepackage{zhnumber}	% counters in Chinese
+\usepackage{fontspec}
+\usepackage{comment}
+\usepackage{xifthen}
+\usepackage{verbatim}
+
+\usetheme{CambridgeUS} % try Madrid
+\usecolortheme{beaver} % try beaver, dolphin, seahorse
+\usefonttheme[onlymath]{serif} % try "professionalfonts"
+% \setCJKmainfont{SimSun} % try SimSun
+
+\usepackage{amsmath, amsfonts, amssymb, mathtools, pifont}
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+\def\checkmark{\tikz\fill[scale=0.5](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;} 
+
+\usepackage{graphicx, subcaption}
+\usepackage[export]{adjustbox}
+
+\usepackage[framemethod=TikZ]{mdframed}
+
+\usepackage[normalem]{ulem} % strike through text
+\newcommand{\soutthick}[1]{%
+    \renewcommand{\ULthickness}{2.0pt}%
+       \sout{#1}%
+    \renewcommand{\ULthickness}{.4pt}% Resetting to ulem default
+}
+
+\setbeamersize{text margin left = 2em, text margin right = 1em}
+\setbeamercolor{footnote mark}{fg = teal}
+\setbeamertemplate{itemize items}[default]
+\setbeamertemplate{enumerate items}[default]
+
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usepackage{pgfplots}
+\usetikzlibrary{arrows.meta, shapes, positioning, calc, backgrounds, fit}
+
+% for tables
+\usepackage{multirow}
+\newcommand{\innercell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}
+\usepackage{hhline}
+%%%%%%%%%%%%%% for appendix %%%%%%%%%%%%%%%%
+% http://www-ljk.imag.fr/membres/Jerome.Lelong/latex/appendixnumberbeamer.sty
+% Reference: http://tex.stackexchange.com/questions/2541/beamer-frame-numbering-in-appendix
+\usepackage{appendixnumberbeamer}
+% Add total frame count to slides, optional. From Stefan,
+% http://www.latex-community.org/forum/viewtopic.php?f=4&t=2173
+\expandafter\def\expandafter\insertshorttitle\expandafter{%
+  \insertshorttitle\hfill\insertframenumber\,/\,\inserttotalframenumber}
+%%%%%%%%%%%%%% for appendix %%%%%%%%%%%%%%%%
+
+% for fig without caption: #1: width/size; #2: fig file
+\newcommand{\fignocaption}[2]{
+  \begin{figure}[htp]
+    \centering
+    \includegraphics[#1]{#2}
+  \end{figure}
+}
+
+% for fig with caption: #1: width/size; #2: fig file; #3: fig caption
+\newcommand{\fig}[3]{
+  \begin{figure}[htp]
+    \centering
+      \includegraphics[#1]{#2}
+      \caption{#3}
+  \end{figure}
+}
+
+% for cite: #1: author; #2: conference #3: year
+\newcommand{\citeinbeamer}[3]{{\tiny{\textcolor{blue}{[#1@#2'#3]}}}}
+
+\usepackage[backend=bibtex]{biblatex}
+\addbibresource{phd-defense-report.bib}
+
+\newcommand{\chameleon}{\textsc{Chameleon}}
+
+\newcommand{\term}[1]{\textcolor{blue}{\scriptsize (#1)}}
+\newcommand{\set}[1]{\{#1\}}
+\newcommand{\question}[1]{\textcolor{red}{\centerline{#1}}}
+\newcommand{\answer}[1]{\textcolor{blue}{\centerline {#1}}}
+\newcommand{\alertred}[1]{\textcolor{red}{#1}}
+\newcommand{\alertblue}[1]{\textcolor{blue}{#1}}
+\newcommand{\todo}[1]{\textcolor{red}{\textbf{TODO:} #1}}
+\newcommand{\mathbfblue}[1]{\textcolor{blue}{$\mathbf{#1}$}}
+
+\newcommand{\papertitle}{Parameterized and Runtime-tunable Snapshot Isolation in Distributed Transactional Key-value Stores}
+\newcommand{\shortpapertitle}{Parameterized and Runtime-tunable Snapshot Isolation}
+
+\newcommand{\putop}{\texttt{put(K key, V val)}}
+\newcommand{\getop}{\texttt{get(K key)}}
