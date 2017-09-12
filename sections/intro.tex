@@ -1,24 +1,25 @@
 \section{Motivation for RVSI}
 
 %%%%%%%%%%%%%%%
-\begin{frame}{}
-  Distributed key-value stores
-
+\begin{frame}{Distributed key-value stores}
+  \fignocaption{width = 0.60\textwidth}{figs/dsss.pdf}
   \centerline{\putop{} \qquad \getop{}}
 \end{frame}
 %%%%%%%%%%%%%%%
 
+% Distributed transactional key-value stores
 %%%%%%%%%%%%%%%
-\begin{frame}{}
-  Transactional sematics
+\begin{frame}{Transactional semantics}
+  % \fignocaption{width = 0.50\textwidth}{figs/acid.png} 
 
-  Distributed transactional key-value stores
+  existential consistency atomic visibility example
+
 \end{frame}
 %%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%
-\begin{frame}{}
-  Transactional consistency models
+\begin{frame}{Transactional consistency models}
+  \fignocaption{width = 0.50\textwidth}{figs/consistency-model-tree.png}
 
   Snapshot isolation (SI):
   \begin{itemize}
@@ -29,28 +30,59 @@
 %%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%
-\begin{frame}{}
+\begin{frame}{Distributed SI}
   Costs of SI
 
-  Relaxed variants of SI
+  Relaxed variants of SI:
+  \begin{description}[PL-FCV]
+    \item[GSI~\footnote{GSI: Generalized Snapshot Isolation}]
+    \item[NMSI~\footnote{NMSI: Non-Monotonic Snapshot Isolation}]
+    \item[PL-FCV~\footnote{PL-FCV: Forward Consistent View}]
+    \item[PSI~\footnote{PSI: Parallel Snapshot Isolation}]
+  \end{description}
 \end{frame}
 %%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%
-\begin{frame}{}
-  Drawbacks
+\begin{frame}{Two drawbacks}
+  \begin{enumerate}
+    \setlength{\itemsep}{8pt}
+    \item Unbounded inconsistency
+      \begin{itemize}
+	\item no specification of the severity of the anomalies w.r.t SI
+      \end{itemize}
+    \item Untunable at runtime
+      \begin{itemize}
+	\setlength{\itemsep}{5pt}
+	\item determined at the system design phase
+	\item remain unchanged once the system is deployed
+      \end{itemize}
+  \end{enumerate}
 \end{frame}
 %%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%
-\begin{frame}{}
-  A motivating example
+\begin{frame}{A Motivating Example}
+  \centerline{The \emph{Books} table.}
+  \begin{table}
+    \centering
+    \begin{tabular}{|c|c|c|c|c|c|c|c|}
+      \hline
+      Title & Authors & Publisher & Sales & Inventory & Ratings & Reviews & $\cdots$ \\
+      \hline
+    \end{tabular}
+  \end{table}
+
+  \begin{description}[Bookstore Clerk:]
+    \item[Customer:]
+    \item[Bookstore Clerk:]
+    \item[Sales Analyst:]
+  \end{description}
 \end{frame}
 %%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%
-\begin{frame}{}
-  Our contributions
+\begin{frame}{Contributions}
 \end{frame}
 %%%%%%%%%%%%%%%
 
