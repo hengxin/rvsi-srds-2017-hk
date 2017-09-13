@@ -37,6 +37,31 @@
 \usepackage{pgfplots}
 \usetikzlibrary{arrows.meta, shapes, positioning, calc, backgrounds, fit}
 
+% for algorithms
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode} % also loading algorithmicx
+\ExplSyntaxOn
+\bool_new:N \l__xeCJK_listings_letter_bool % workaround
+\ExplSyntaxOff
+\usepackage{listings}
+\usepackage{textcomp}
+
+\newcommand{\hStatex}[0]{\vspace{5pt}}
+\newcommand{\algvariable}[1]{\texttt{#1}}
+\newcommand{\algkeyword}[1]{\textbf{#1}}
+\newcommand{\algprocedure}[1]{\textsc{#1}}
+
+% lComment: line comment; mComment: margin comment
+\algnewcommand{\lComment}[1]{\State \emph{$\triangleright$ #1}}
+\algnewcommand{\lendComment}[1]{\State \textcolor{violet}{\emph{$\triangleleft$ #1}}}
+\algnewcommand{\mComment}[1]{\Comment{\emph{#1}}}
+
+\algblockdefx{BeginRepeat}{EndRepeat}{\textbf{repeat}}{}
+\algnotext{EndRepeat}
+
+\newcommand{\attr}[1]{\textsl{#1}}
+\newcommand{\msg}[2]{$\langle \textup{\scriptsize #1}, #2 \rangle$}
+
 % for tables
 \usepackage{multirow}
 \newcommand{\innercell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}
@@ -101,3 +126,7 @@
 \newcommand{\ktwofv}{k_2\text{-FV}}
 \newcommand{\kthreesv}{k_3\text{-SV}}
 \newcommand{\chameleon}{\textsc{Chameleon}}
+
+\newcommand{\algnamefont}[1]{#1}
+\newcommand{\rvsims}{\algnamefont{RVSI-MS}}
+\newcommand{\rvsimp}{\algnamefont{RVSI-MP}}

@@ -1,0 +1,30 @@
+\begin{lstlisting}[
+  language = Java,
+  basicstyle = \ttfamily\footnotesize,
+  showstringspaces = false,
+  keywordstyle = \color{blue}\bfseries,
+  commentstyle = \color{teal},
+  stringstyle = \bfseries,
+  upquote = true,
+  frame = box,
+  breaklines = true,
+  linewidth = 0.85\textwidth
+]
+  // Initialize keys (ck, ck1, and ck2) here
+  ITx tx = new RVSITx(/** context **/);
+
+  tx.begin();
+
+  // Read and write
+  ITsCell tsCell = tx.read(ck);
+  ITsCell tsCell1 = tx.read(ck1);
+  tx.write(ck1, new Cell("R1C1"));
+  ITsCell tsCell2 = tx.read(ck2);
+
+  // Specify RVSI specs. (e.g., SVSpec)
+  RVSISpec sv = new SVSpec();
+  sv.addSpec({ck, ck1, ck2}, 2);
+  tx.collectRVSISpec(sv);
+
+  boolean committed = tx.end();
+\end{lstlisting}
