@@ -3,38 +3,80 @@
 % System Design of \chameleon{}
 \input{sections/chameleon}
 
+% the RVSI-MS protocol
 %%%%%%%%%%%%%%%
 \begin{frame}{\rvsims{} Protocol}
+  \centerline{\textbf{\rvsims{}}: RVSI protocol for master-slave replication}
+
+  \vspace{1.0cm}
+  In terms of \emph{event} generation and handling:
+  \begin{description}
+    \item[Clients:] \ebegin, \eread, \ewrite, \eend%
+    \item[Master:] \estart, \ecommit, \esend%
+    \item[Slaves:] \ereceive%
+  \end{description}
 \end{frame}
 %%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%
-\begin{frame}{}
+\begin{frame}{\rvsims{} Protocol}
+  TikZ overlay for \rvsims{}
 \end{frame}
 %%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%
-\begin{frame}{}
+\begin{frame}{\rvsims{} Protocol}
+  Calculating version constraints:
 \end{frame}
 %%%%%%%%%%%%%%%
 
+% the RVSI-MP protocol
 %%%%%%%%%%%%%%%
-\begin{frame}{}
+\begin{frame}{\rvsimp{} Protocol}
+  \begin{center}
+    Distributed transactions spanning multiple masters need to be committed atomically.
+
+    \pause
+    Using the two-phase commit (2PC) protocol.
+  \end{center}
 \end{frame}
 %%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%
 \begin{frame}{\rvsimp{} Protocol}
+  Assumes a timestamp oracle:
+  \begin{description}
+    \item[Clients:] 
+    \item[Masters:]
+  \end{description}
 \end{frame}
 %%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%
-\begin{frame}{}
+\begin{frame}{\rvsimp{} Protocol}
+  \rvsi{} version constraints in 2PC protocol:
+  \begin{description}
+    \item[$\konebv$:]
+    \item[$\ktwofv$:]
+    \item[$\kthreesv$:]
+  \end{description}
 \end{frame}
 %%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%
-\begin{frame}{}
+\begin{frame}{\rvsims{} Protocol}
+  \begin{figure}[t]
+    \input{algs/alg-rvsims}
+    % \resizebox{0.90\linewidth}{!}{\input{algs/alg-rvsims.tex}}
+  \end{figure}
+\end{frame}
+%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%
+\begin{frame}{\rvsimp{} Protocol}
+  \begin{figure}[t]
+    \input{algs/alg-rvsimp}
+  \end{figure}
 \end{frame}
 %%%%%%%%%%%%%%%
 
