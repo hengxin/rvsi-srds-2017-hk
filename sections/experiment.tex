@@ -2,36 +2,166 @@
 
 %%%%%%%%%%%%%%%
 \begin{frame}{}
+  \begin{center}
+    Impacts of \rvsi{} specification \\[5pt]
+    on the \emph{transaction abort rates} in various scenarios
+  \end{center}
+
+  \pause
+  \vspace{0.50cm}
+  \centerline{\red{Performance?}}
+  \begin{itemize}
+    \item Not done yet in this work
+    \item \chameleon{} prototype is $\ldots$
+  \end{itemize}
 \end{frame}
 %%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%
 \begin{frame}{}
+  Transactions abort for two reasons:
+  \begin{itemize}
+    \item ``vc-aborted'': \rvsi{} version constraints violated
+    \item ``wcf-aborted'': the WCF property violated
+  \end{itemize}
+
+  \pause
+  \vspace{0.60cm}
+  Transaction abort rates due to \red{``vc-aborted''} are \emph{sensitive} to different values of $k_1$, $k_2$, or $k_3$,
+  \pause
+  but those due to \blue{``wcf-aborted''} are not.
+
+  \pause
+  \vspace{0.50cm}
+  \[
+    h \in \rvsi{} \iff h \in \konebv{} \cap \ktwofv{} \cap \kthreesv{} \cap \wcf{}.
+  \]
 \end{frame}
 %%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%
 \begin{frame}{}
+  \begin{columns}
+    \column{0.50\textwidth}
+      \chameleon{} prototype on Aliyun:
+      \begin{itemize}
+	\item 3 datacenters~\footnotemark[1]
+	\item 3 nodes in each datacenter
+	\item Partition \& Replication
+	\item Clients in our lab~\footnotemark[2]
+      \end{itemize}
+
+      \vspace{0.60cm}
+      \uncover<2->{
+	(One-way) delays among nodes~\footnotemark[3]:
+	\begin{description}[Across datacenters:]
+	  \item[Within datacenter:] $1 \sim 2$ms
+	  \item[Across datacenters:] $15 \sim 25$ms
+	  \item[Clients to nodes:] $15 \sim 20$ms
+	\end{description}
+      }
+    \column{0.50\textwidth}
+      \fignocaption{width = 0.85\textwidth}{figs/chameleon-arch.pdf}
+  \end{columns}
+
+  \footnotetext[1]{Located in East China, North China, and South China, respectively.}
+  \footnotetext[2]{Located in East China.}
+  \footnotetext[3]{\url{https://github.com/hengxin/aliyun-ping-traces}}
 \end{frame}
 %%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%
 \begin{frame}{}
+  \input{tables/rvsi-workload}
 \end{frame}
 %%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%
 \begin{frame}{}
+  under read-frequent workloads
 \end{frame}
 %%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%
 \begin{frame}{}
+  \fignocaption{width = 0.80\textwidth}{figs/aliyun-vc-rf.pdf}
+
+  \pause
+  The transaction abort rates due to ``vc-aborted'' \pause can be \red{greatly reduced}
+  by \blue{slightly} increasing the values of $k_1$, $k_2$, or $k_3$:
+  \[
+    vc(1,0,0) = 0.1994 \implies vc(2,1,1) = 0.0091 \quad (\text{\#clients} = 30)
+  \]
 \end{frame}
 %%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%
 \begin{frame}{}
+  \fignocaption{width = 0.55\textwidth}{figs/aliyun-bvfvsv.pdf}
+
+  \pause
+  Most ``vc-aborted'' transactions abort because of violating \red{$\ktwofv$}.
+  \[
+    fv(1,0,0) = 0.1889 \implies fv(\blue{2},0,0) = 0.1866 \implies fv(1,\red{\bf 1},0) = 0.0064
+  \]
+\end{frame}
+%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%
+\begin{frame}{}
+  \begin{center}
+    \red{Question: when does $k_1$ for $\konebv$ take effect?} \\[10pt]
+    It seems that $\konebv$ has \emph{little} impact on the transaction abort rates. \\[30pt]
+    \pause
+    It may be the case in the Aliyun scenario. \\[10pt]
+    \blue{What about other scenarios?}
+  \end{center}
+\end{frame}
+%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%
+\begin{frame}{}
+  \centerline{Three types of delays for \blue{\Large controlled experiments} on local hosts.}
+  \input{tables/rvsi-delay-localhost}
+\end{frame}
+%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%
+\begin{frame}{}
+  \fignocaption{width = 0.50\textwidth}{figs/simlog-rw05.pdf}
+
+  \begin{center}
+    When the \blue{``issueDelay''} gets shorter, \\
+    the impacts of $\ktwofv$ go weaker, \\
+    and the impacts of $\konebv$ have begun to emerge.
+  \end{center}
+\end{frame}
+%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%
+\begin{frame}{}
+  \begin{description}[issueDelay = 20ms:]
+    \setlength{\itemsep}{10pt}
+    \item[issueDelay = 20ms:] $bv(1,0,0) = \red{0.0057} \quad\;\; fv(1,0,0) = 0.0251$
+    \item[issueDelay = 15ms:] $bv(1,0,0) = \red{0.08225} \quad fv(1,0,0) = 0.0393$
+    \item[issueDelay = 5ms:] $bv(1,0,0) = \red{0.1716} \quad\;\; fv(1,0,0) = 0.0045$
+  \end{description}
+\end{frame}
+%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%
+\begin{frame}{}
+  Generally, \rvsi{} helps to reduce the transaction abort rates 
+  when applications are willing to tolerate certain anomalies.
+
+  \pause
+  \vspace{0.6cm}
+  \begin{description}[<+->]
+    \setlength{\itemsep}{5pt}
+    \item[$\ktwofv$:] On Aliyun, most transactions have been aborted because of violating $\ktwofv$.
+    \item[$\konebv$:] In controlled experiments,
+    \item[$\kthreesv$:]
+  \end{description}
 \end{frame}
 %%%%%%%%%%%%%%%
 
