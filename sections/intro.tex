@@ -56,13 +56,15 @@
 %%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%
-\begin{frame}{Two drawbacks}
+\begin{frame}{}
+  Two possible drawbacks:
   \begin{enumerate}
     \setlength{\itemsep}{8pt}
     \item Unbounded inconsistency
       \begin{itemize}
 	\item no specification of the severity of the anomalies w.r.t SI
       \end{itemize}
+    \pause
     \item Untunable at runtime
       \begin{itemize}
 	\setlength{\itemsep}{5pt}
@@ -74,8 +76,13 @@
 %%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%
-\begin{frame}{A Motivating Example}
-  \centerline{The \emph{Books} table.}
+\begin{frame}{}
+  \begin{center}
+    An online bookstore application for motivating \\
+    \red{\large ``bounded inconsistency''} and \red{\large ``runtime-tuable''}:
+  \end{center}
+
+  \vspace{-0.50cm}
   \begin{table}
     \centering
     \begin{tabular}{|c|c|c|c|c|c|c|c|}
@@ -85,20 +92,50 @@
     \end{tabular}
   \end{table}
 
-  \begin{description}[Bookstore Clerk:]
-    \item[Customer:]
-    \item[Bookstore Clerk:]
-    \item[Sales Analyst:]
+  \pause
+  \vspace{0.40cm}
+  \begin{description}[Bookstore Clerk ($T_2$):]
+    \setlength{\itemsep}{6pt}
+    \item[Customer ($T_1$):] Obtaining the basic info. about a book
+      \begin{itemize}
+	\item \emph{\blue{out-of-date}} reviews
+      \end{itemize}
+      \pause
+    \item[Bookstore Clerk ($T_2$):] Checking the inventory of a book
+      \begin{itemize}
+	\item inventory updated by concurrent transactions committed \emph{\blue{after}} $T_2$ starts
+      \end{itemize}
+      \pause
+    \item[Sales Analyst ($T_3$):] Studying sales vs. ratings of a book
+      \begin{itemize}
+	\item sales and ratings from \emph{\blue{separate snapshots}}
+      \end{itemize}
   \end{description}
 \end{frame}
 %%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%
-\begin{frame}{Contributions}
-\end{frame}
-%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%
 \begin{frame}{}
+  The idea of \red{\large ``parameterized and runtime-tunable snapshot isolation''}.
+
+  \vspace{0.50cm}
+  \begin{itemize}
+    \setlength{\itemsep}{10pt}
+    \item \rvsi{}: Relaxed Version Snapshot Isolation
+      \begin{description}
+	\item[$\konebv$:] $k_1$-version bounded \emph{\blue{backward}} view
+	\item[$\ktwofv$:] $k_2$-version bounded \emph{\blue{forward}} view
+	\item[$\kthreesv$:] $k_3$-version bounded \emph{\blue{snapshot}} view
+      \end{description}
+    \pause
+    \item \chameleon{} prototype: distributed transactional key-value store
+      \begin{itemize}
+	\item achieves \rvsi{}
+	\item allows each transaction to tune its consistency level at runtime
+	  \pause
+	\item deployed on Aliyun~\footnote{\url{http://www.aliyun.com/}}
+	\item explore the impacts of \rvsi{} on the transaction abort rates
+      \end{itemize}
+  \end{itemize}
 \end{frame}
 %%%%%%%%%%%%%%%
