@@ -1,8 +1,8 @@
 \section{Motivation for RVSI}
 
 %%%%%%%%%%%%%%%
-\begin{frame}{Distributed key-value stores}
-  \fignocaption{width = 0.60\textwidth}{figs/dsss.pdf}
+\begin{frame}{}
+  \fig{width = 0.50\textwidth}{figs/kvs.pdf}{Distributed key-value stores.}
   \centerline{\putop{} \qquad \getop{}}
 \end{frame}
 %%%%%%%%%%%%%%%
@@ -18,27 +18,39 @@
 %%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%
-\begin{frame}{Transactional consistency models}
-  \fignocaption{width = 0.50\textwidth}{figs/consistency-model-tree.png}
+\begin{frame}{}
+  \fig{width = 0.55\textwidth}{figs/consistency-model-tree.png}
+  {Transactional consistency models (from \citeinbeamer{Bailis}{VLDB}{14}).}
 
-  Snapshot isolation (SI):
+  \pause
+  \vspace{0.30cm}
+  Snapshot isolation (SI \citeinbeamer{Berenson}{SIGMOD}{95}, \citeinbeamer{Adya}{Thesis}{99}):
   \begin{itemize}
-    \item \textcolor{red}{Read} from the latest consistent snapshot of all data items
-    \item No \textcolor{red}{write} conflicts among concurrent transactions
+    \item \red{Read} from the ``latest'' snapshot as of the time the transaction started
+    \item No \red{write}-conflicting concurrent transactions
   \end{itemize}
 \end{frame}
 %%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%
-\begin{frame}{Distributed SI}
-  Costs of SI
+\begin{frame}{}
+  \begin{center}
+    Reading the \red{``latest''} in a \blue{distributed} setting \\
+    often requires intensive coordinations.
+  \end{center}
 
-  Relaxed variants of SI:
-  \begin{description}[PL-FCV]
-    \item[GSI~\footnote{GSI: Generalized Snapshot Isolation}]
-    \item[NMSI~\footnote{NMSI: Non-Monotonic Snapshot Isolation}]
-    \item[PL-FCV~\footnote{PL-FCV: Forward Consistent View}]
-    \item[PSI~\footnote{PSI: Parallel Snapshot Isolation}]
+  \pause
+  \vspace{0.50cm}
+  Relaxed variants of (distributed) SI:
+  \begin{description}[PL-FCVpad]
+    \item[GSI~\footnote{GSI: Generalized Snapshot Isolation \citeinbeamer{Elnikety}{SRDS}{05}}:]
+      allows to read from ``older'' snapshots
+    \item[NMSI~\footnote{NMSI: Non-Monotonic Snapshot Isolation \citeinbeamer{Ardekani}{SRDS}{13}}:]
+      allows to observe non-monotonically ordered snapshots
+    \item[PL-FCV~\footnote{PL-FCV: Forward Consistent View \citeinbeamer{Aday}{Thesis}{99}}:]
+      allows a transaction to observe the updates of transactions that commit after it started
+    \item[PSI~\footnote{PSI: Parallel Snapshot Isolation \citeinbeamer{Sovran}{SOSP}{11}}:]
+      causal ordering of transactions across sites
   \end{description}
 \end{frame}
 %%%%%%%%%%%%%%%
