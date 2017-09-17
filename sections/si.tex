@@ -1,16 +1,53 @@
-
+% si
 %%%%%%%%%%%%%%%
 \begin{frame}{}
+    Transaction $T_i$:
+    \begin{itemize}
+      \item begins with a \texttt{start} operation $s_i$ 
+      \item contains a sequence of \texttt{read} or \texttt{write} operations
+      \item ends with a \texttt{commit} operation $c_i$ or an \texttt{abort} operation $a_i$
+    \end{itemize}
+
+    \pause
+    \vspace{0.30cm}
+    History: modelling an execution of a transactional key-value store
+    \begin{itemize}
+      \item $w_i(x_i)$: transaction $T_i$ writing version $i$ of data item $x$
+      \item $r_i(x_j)$: transaction $T_i$ reading version $j$ of data item $x$ written by $T_j$
+      \item \emph{time-precedes partial order} $\timeprech$ over operations
+      \item $T_i$ and $T_j$ are concurrent:
+	\[
+	  s_i \timeprech c_j \land s_j \timeprech c_i
+	\]
+    \end{itemize}
 \end{frame}
 %%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%
 \begin{frame}{}
+  Snapshot isolation requires that:
+  \begin{description}[Snapshot Write:]
+    \item[Snapshot Read:] Each transaction read data from the ``lastest'' snapshot as of the time the transaction started.
+    \item[Snapshot Write:] No \red{write}-conflicting concurrent transactions
+  \end{description}
 \end{frame}
 %%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%
 \begin{frame}{}
+  A history $h$ is in snapshot isolation if and only if it satisfies \citeinbeamer{Adya}{Thesis}{99} \\[0.20cm]
+  \begin{description}[Snapshot Write:]
+    \item[Snapshot Read:] All reads of transaction $T_i$ occur at $T_i$'s start time.
+      \begin{align*}
+	\forall &r_i(x_{j \neq i}), w_{k \neq j}(x_k), c_k \in h: \\
+	& (c_j \in h \land c_j \timeprech s_i)
+	 \land (s_i \timeprech c_k \lor c_k \timeprech c_j).
+      \end{align*}
+    \item[Snapshot Write:] No concurrent committed transactions may write the same data item.
+      \begin{align*}
+	\forall w_i(x_i), w_{j \neq i}(x_j) \in h \implies (c_i \timeprech s_j \lor c_j \timeprech s_i).
+      \end{align*}
+  \end{description}
 \end{frame}
 %%%%%%%%%%%%%%%
 
