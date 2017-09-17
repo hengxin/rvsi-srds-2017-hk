@@ -1,34 +1,51 @@
 % si
 %%%%%%%%%%%%%%%
 \begin{frame}{}
-    Transaction $T_i$:
-    \begin{itemize}
-      \item begins with a \texttt{start} operation $s_i$ 
-      \item contains a sequence of \texttt{read} or \texttt{write} operations
-      \item ends with a \texttt{commit} operation $c_i$ or an \texttt{abort} operation $a_i$
-    \end{itemize}
+  Transaction $T_i$:
+  \begin{itemize}
+    \item begins with a \texttt{start} operation $s_i$ 
+    \item contains a sequence of \texttt{read} or \texttt{write} operations
+    \item ends with a \texttt{commit} operation $c_i$ or an \texttt{abort} operation $a_i$
+  \end{itemize}
 
-    \pause
-    \vspace{0.30cm}
-    History: modelling an execution of a transactional key-value store
-    \begin{itemize}
-      \item $w_i(x_i)$: transaction $T_i$ writing version $i$ of data item $x$
-      \item $r_i(x_j)$: transaction $T_i$ reading version $j$ of data item $x$ written by $T_j$
-      \item \emph{time-precedes partial order} $\timeprech$ over operations
-      \item $T_i$ and $T_j$ are concurrent:
-	\[
-	  s_i \timeprech c_j \land s_j \timeprech c_i
-	\]
-    \end{itemize}
+  \pause
+  \vspace{0.30cm}
+  \begin{description}[$w_i(x_i)$:]
+    \item[$x_i$:] version $i$ of data item $x$ written by $T_i$
+    \item[$r_i(x_j)$:] transaction $T_i$ reading $x_j$
+    \item[$w_i(x_i)$:] transaction $T_i$ writing $x_i$
+  \end{description}
 \end{frame}
 %%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%
 \begin{frame}{}
-  Snapshot isolation requires that:
+  History: modelling an execution of a transactional key-value store
+  \begin{itemize}
+    \item \emph{time-precedes partial order} $\timeprech$ over operations
+  \end{itemize}
+
+  \pause
+  \vspace{0.50cm}
+  Two transactions are \emph{concurrent} if
+  \begin{columns}
+    \column{0.50\textwidth}
+      \[
+	s_i \timeprech c_j \land s_j \timeprech c_i
+      \]
+    \column{0.50\textwidth}
+      \fignocaption{width = 0.60\textwidth}{figs/concur-tx}
+  \end{columns}
+\end{frame}
+%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%
+\begin{frame}{}
+  Snapshot isolation requires that
+  \vspace{10pt}
   \begin{description}[Snapshot Write:]
-    \item[Snapshot Read:] Each transaction read data from the ``lastest'' snapshot as of the time the transaction started.
-    \item[Snapshot Write:] No \red{write}-conflicting concurrent transactions
+    \item[Snapshot Read:] Each transaction reads data from the ``lastest'' snapshot as of the time the transaction started
+    \item[Snapshot Write:] No write-conflicting concurrent transactions
   \end{description}
 \end{frame}
 %%%%%%%%%%%%%%%
@@ -48,30 +65,5 @@
 	\forall w_i(x_i), w_{j \neq i}(x_j) \in h \implies (c_i \timeprech s_j \lor c_j \timeprech s_i).
       \end{align*}
   \end{description}
-\end{frame}
-%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%
-\begin{frame}{}
-\end{frame}
-%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%
-\begin{frame}{}
-\end{frame}
-%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%
-\begin{frame}{}
-\end{frame}
-%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%
-\begin{frame}{}
-\end{frame}
-%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%
-\begin{frame}{}
 \end{frame}
 %%%%%%%%%%%%%%%
