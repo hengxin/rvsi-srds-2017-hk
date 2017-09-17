@@ -4,35 +4,43 @@
 
 %%%%%%%%%%%%%%%
 \begin{frame}{}
+  Principles of \rvsi{}:
   \begin{itemize}
     \setlength{\itemsep}{10pt}
-    \item<1-> Parameters ($k_1, k_2, k_3$) to control the severity of the anomalies w.r.t SI
+    \item<1-> Using parameters ($k_1, k_2, k_3$) to control the severity of the anomalies w.r.t SI
     \item<2-> $\rc{}~\footnotemark \supset \rvsi(k_1, k_2, k_3) \supset \si{}$
     \item<2-> $\rvsi(\infty,\infty,\infty) = \rc \qquad \rvsi(1,0,\ast) = \si$
   \end{itemize}
-  \footnotetext{RC: Read Committed}
+  \footnotetext{RC: Read Committed isolation.}
 \end{frame}
 %%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%
 \begin{frame}{}
   \begin{quote}
-    Each transaction reads data from the ``lastest'' snapshot as of the time the transaction started.
-    \hfill -- ``Snapshot Read'' property of SI
+    Each transaction reads data from the ``latest'' snapshot as of the time the transaction started.\\
+    \hfill -- The ``Snapshot Read'' property of SI
   \end{quote}
 
-  \begin{enumerate}[<+->]
-    \setlength{\itemsep}{8pt}
-    \item ``stale'' data versions		\hfill \uncover<4->{\red{bounded staleness}}
-    \item ``concurrent'' data versions  	\hfill \uncover<5->{\red{bounded concurrency level}}
-    \item ``non-snapshot'' data versions	\hfill \uncover<6->{\red{bounded distance}}
-  \end{enumerate}
+  \vspace{0.60cm}
+  \rvsi{} relaxes ``Snapshot Read'' in three ways:
+  \pause
+  \begin{description}[$\kthreesv$ (Snapshot View):]
+    \setlength{\itemsep}{3pt}
+    \item[$\konebv$ (Backward View):] ``stale'' data versions		\hfill \red{staleness $\le k_1$}
+      \pause
+    \item[$\ktwofv$ (Forward View):] ``concurrent'' data versions  	\hfill \red{concurrency level $\le k_2$}
+      \pause
+    \item[$\kthreesv$ (Snapshot View):] ``non-snapshot'' data versions	\hfill \red{distance $\le k_3$}
+  \end{description}
 \end{frame}
 %%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%
 \begin{frame}{}
-  \fignocaption{width = 0.85\textwidth}{figs/rvsi-definition.pdf}
+  % \fignocaption{width = 1.0\textwidth}{figs/rvsi-definition.pdf}
+  % \resizebox{1.00\textwidth}{!}{\input{tikz/rvsi-def}}
+  \scalebox{0.30}{\input{tikz/rvsi-def}}
 \end{frame}
 %%%%%%%%%%%%%%%
 
@@ -60,7 +68,7 @@
 
   \vspace{0.50cm}
   \[
-    \rvsi(1,0,\ast) = \si
+    \rvsi(\infty,\infty,\infty) = \rc \qquad \rvsi(1,0,\ast) = \si
   \]
 \end{frame}
 %%%%%%%%%%%%%%%
