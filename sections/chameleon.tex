@@ -1,9 +1,9 @@
 % System Design of \chameleon{}
 
 %%%%%%%%%%%%%%%
-\begin{frame}{\chameleon{} Protocol}
+\begin{frame}{}
   \begin{center}
-    \chameleon{}: \\[10pt]
+    \chameleon{} prototype: \\[10pt]
     A prototype \textbf{partitioned} \textbf{replicated} \\[6pt]
     distributed transactional \textbf{key-value} store
   \end{center}
@@ -11,7 +11,7 @@
 %%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%
-\begin{frame}{\chameleon{} Prototype}
+\begin{frame}{}
   \begin{center}
     Classic \textbf{key-value} data model \\[4pt]
       Key: (row key, column key)
@@ -20,33 +20,34 @@
 %%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%
-\begin{frame}{\chameleon{} Prototype}
-  \fignocaption{width = 0.70\textwidth}{figs/chameleon-arch.pdf}
+\begin{frame}{}
+  % \fignocaption{width = 0.70\textwidth}{figs/chameleon-arch.pdf}
+  \begin{center}
+    \resizebox{0.70\textwidth}{!}{\input{tikz/chameleon-arch}}
+  \end{center}
 
   \begin{center}
     \only<2>{Keys are \textbf{partitioned} within a single datacenter.}
-    \only<3>{Each key is \textbf{replicated} in a master-slave manner across datacenters.}
-    \only<4>{Transactions are first executed and committed on the masters,\\
-    	and are then asynchronously propagated to slaves.}
+    \only<3-4>{Each key is \textbf{replicated} across datacenters} \only<4>{in a \textbf{master-slave} manner.}
+    \only<5>{Transactions are first executed and committed on the \textbf{masters},\\
+      and are then asynchronously propagated to \textbf{slaves}.}
   \end{center}
 \end{frame}
 %%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%
-\begin{frame}{\chameleon{} Protocol}
-  \only<1-3, 5->{\fignocaption{width = 0.45\textwidth}{figs/chameleon-framework.pdf}}
+\begin{frame}{}
+  \only<1-3, 5->{\fignocaption{width = 0.50\textwidth}{figs/chameleon-framework.pdf}}
 
   \begin{center}
-    \only<2>{Partitioned replicated transactional key-value store}
-    \only<3>{Client library}
-    \only<5>{\rvsi{} protocol: \rvsims{} + \rvsimp{}}
+    \only<2>{\blue{1.} Partitioned replicated transactional key-value store}
+    \only<3>{\blue{2.} Client library}
+    \only<5>{\blue{3.} \rvsi{} protocol: \rvsims{} + \rvsimp{}}
   \end{center}
 
   \only<4>{
-    \begin{figure}[t]
-      \centering
-      \input{algs/rvsi-code}
-      \caption{Code snippet for writing \rvsi{} transactions.}
-    \end{figure}}
+    Code snippet for writing \rvsi{} transactions: \\[8pt]
+    \input{algs/rvsi-code}
+  }
 \end{frame}
 %%%%%%%%%%%%%%%

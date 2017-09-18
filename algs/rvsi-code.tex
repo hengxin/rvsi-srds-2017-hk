@@ -8,22 +8,19 @@
   upquote = true,
   frame = box,
   breaklines = true,
-  linewidth = 0.90\textwidth
+  linewidth = 0.70\textwidth
 ]
-  // Initialize keys (ck, ck1, and ck2) here
+  // Initialize keys (ck1 and ck2) here
+
   ITx tx = new RVSITx(/** context **/);
 
   tx.begin();
 
-  // Read and write
-  ITsCell tsCell = tx.read(ck);
-  ITsCell tsCell1 = tx.read(ck1);
-  tx.write(ck1, new Cell("R1C1"));
-  ITsCell tsCell2 = tx.read(ck2);
+  // Read and write here
 
   // Specify RVSI specs. (e.g., SVSpec)
   RVSISpec sv = new SVSpec();
-  sv.addSpec({ck, ck1, ck2}, 2);
+  sv.addSpec({ck1, ck2}, 2);
   tx.collectRVSISpec(sv);
 
   boolean committed = tx.end();
