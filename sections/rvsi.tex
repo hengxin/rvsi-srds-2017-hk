@@ -25,11 +25,11 @@
   \vspace{0.60cm}
   \rvsi{} relaxes ``Snapshot Read'' in three ways:
   \pause
-  \begin{description}[$\kthreesv$ (Snapshot View):]
+  \begin{description}%[$\konebv$ (Backward View):]
     \setlength{\itemsep}{3pt}
     \item[$\konebv$ (Backward View):] ``stale'' data versions		\hfill \red{staleness $\le k_1$}
       \pause
-    \item[$\ktwofv$ (Forward View):] ``concurrent'' data versions  	\hfill \red{concurrency level $\le k_2$}
+    \item[$\ktwofv$ (Forward View):] ``concurrent'' data versions  	\hfill \red{forward level $\le k_2$}
       \pause
     \item[$\kthreesv$ (Snapshot View):] ``non-snapshot'' data versions	\hfill \red{distance $\le k_3$}
   \end{description}
@@ -39,8 +39,9 @@
 %%%%%%%%%%%%%%%
 \begin{frame}{}
   % \fignocaption{width = 1.0\textwidth}{figs/rvsi-definition.pdf}
-  % \resizebox{1.00\textwidth}{!}{\input{tikz/rvsi-def}}
-  \scalebox{0.30}{\input{tikz/rvsi-def}}
+  \resizebox{1.00\textwidth}{!}{\input{tikz/rvsi-def}}
+  % \scalebox{0.20}{\input{tikz/rvsi-def}}
+  % \input{tikz/rvsi-def}
 \end{frame}
 %%%%%%%%%%%%%%%
 

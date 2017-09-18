@@ -1,12 +1,13 @@
 % si
 %%%%%%%%%%%%%%%
 \begin{frame}{}
-  Transaction $T_i$:
-  \begin{itemize}
-    \item begins with a \texttt{start} operation $s_i$ 
-    \item contains a sequence of \texttt{read} or \texttt{write} operations
-    \item ends with a \texttt{commit} operation $c_i$ or an \texttt{abort} operation $a_i$
-  \end{itemize}
+  $\text{Transaction } T_i:\quad s_i\quad (r_i/w_i)^{+}\quad c_i/a_i$
+
+  \begin{description}
+    \item[$s_i$:] \texttt{start} operation
+    \item[$r_i/w_i$:] \texttt{read/write} operation
+    \item[$c_i/a_i$:] \texttt{commit/abort} operation
+  \end{description}
 
   \pause
   \vspace{0.30cm}

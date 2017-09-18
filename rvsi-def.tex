@@ -1,13 +1,13 @@
 \tikzset{trans-node/.style = {draw, line width = 3pt, inner sep = 12pt}}
-\tikzset{read-from/.style = {>={Stealth[length = 12pt]}, ->, dash pattern = on 20pt off 10pt, very thick, red}}
-\tikzset{knode/.style = {inner sep = 8pt, outer sep = 5pt, font=\fontsize{60}{60}\selectfont}}
-\tikzset{toarrow/.style = {>={Stealth[length = 12pt]}, ->, ultra thick, violet}}
-\tikzset{dashline/.style = {ultra thick, blue, dash pattern = on 20pt off 10pt}}
-\tikzset{cs/.style = {outer sep = 5pt, font=\fontsize{55}{55}\selectfont}}  % c: commit; s: start
+\tikzset{read-from/.style = {>={Stealth[length = 12pt]}, ->, dash pattern = on 20pt off 10pt, thick}}
+\tikzset{knode/.style = {inner sep = 8pt, outer sep = 5pt, font=\fontsize{40}{40}\selectfont}}
+\tikzset{toarrow/.style = {>={Stealth[length = 12pt]}, ->, ultra thick}}
+\tikzset{dashline/.style = {ultra thick, dash pattern = on 20pt off 10pt}}
+\tikzset{cs/.style = {outer sep = 5pt, font=\fontsize{40}{40}\selectfont}}  % c: commit; s: start
 
 % #1: numbering
-\newcommand{\xtrans}[1]{\node (x#1) [trans-node, on chain = x, font=\fontsize{45}{45}\selectfont] {$T_{x_#1}: w_{x_#1}(x_#1)$}}
-\newcommand{\ytrans}[1]{\node (y#1) [trans-node, on chain = y, font=\fontsize{45}{45}\selectfont] {$T_{y_#1}: w_{y_#1}(y_#1)$}}
+\newcommand{\xtrans}[1]{\node (x#1) [trans-node, on chain = x, font=\fontsize{30}{30}\selectfont] {$T_{x_#1}: w_{x_#1}(x_#1)$}}
+\newcommand{\ytrans}[1]{\node (y#1) [trans-node, on chain = y, font=\fontsize{30}{30}\selectfont] {$T_{y_#1}: w_{y_#1}(y_#1)$}}
 
 \begin{tikzpicture}[start chain = x going right,
   		start chain = y going right,
@@ -21,15 +21,15 @@
 
   % transactions updating y
   \begin{scope}
-    \node (y1) [trans-node, on chain = y, below left = 8.0cm and -2.0cm of x3, font=\fontsize{45}{45}\selectfont] {$T_{y_1}: w_{y_1}(y_1)$};
+    \node (y1) [trans-node, on chain = y, below left = 5.0cm and -2.0cm of x3, font=\fontsize{30}{30}\selectfont] {$T_{y_1}: w_{y_1}(y_1)$};
     \foreach \i in {2, ..., 6}
       \ytrans{\i};
   \end{scope}
    
   % transaction T_i reading x and y
   \begin{scope}
-    \node (ti) [trans-node, below right = 5.0cm and 2.5cm of y2, font=\fontsize{50}{50}\selectfont] 
-    {\red{$T_i: \hskip 3em r_i(x_2) \hskip 8em r_i(y_5) \hskip 4em$}};
+    \node (ti) [trans-node, below right = 5.0cm and 2.5cm of y2, font=\fontsize{35}{35}\selectfont] 
+	  {$T_i: \hskip 3em r_i(x_2) \hskip 8em r_i(y_5) \hskip 4em$};
   \end{scope}
 
   \uncover<2->{
@@ -37,21 +37,20 @@
       % T_i reads x2
       \coordinate (c-rx2) at ($(ti.north) !0.5! (ti.north west)$);
       \draw[read-from]  (x2.south) to (c-rx2); % [out = -70, in = 120] (c-rx2);
+      % T_i reads y5
+      \coordinate (c-ry5) at ($(ti.north) !0.5! (ti.north east)$);
+      \draw[read-from] (y5.south) to (c-ry5);
     \end{scope}
+  }
 
+  \uncover<3->{
     % k1
-    \def\konespace{21cm}
-    \def\ktwospace{1.5cm}
+    \def\konespace{11cm}
     \begin{scope}
 	% c-x2-top: commit time of T_x2
 	\draw let \p{p-x2} = (x2.east), \p{p-ti} = (ti.north west) in
 	    node (c-x2-top) [cs] at ($(\x{p-x2}, \y{p-ti}) + (0.0cm, \konespace)$) {$c_{x_2}$};
 	\draw[dashline] (x2.north east) to (c-x2-top.south);
-
-	% s-ti-bot: start time of T_i (drawn at the bottom)
-	\node (s-ti-bot) [cs] at ($(ti.south west) - (0.0cm, \ktwospace)$) {$s_i$};
-	\draw[dashline] let \p{p-ti} = (ti.west), \p{p-x4} = (x4.west) in
-	(s-ti-bot.north) to (\x{p-ti}, \y{p-x4});
 
 	% s-ti-top: start time of T_i (drawn at the top)
 	\node (s-ti-top) [cs] at ($(ti.north west) + (0.0cm, \konespace)$) {$s_i$};
@@ -65,13 +64,10 @@
     \end{scope}
   }
 
-  \uncover<3->{
+  \uncover<4->{
     % k2
     \def\ktwospace{1.5cm}
     \begin{scope}
-	% T_i reads y5
-	\coordinate (c-ry5) at ($(ti.north) !0.5! (ti.north east)$);
-	\draw[read-from] (y5.south) to (c-ry5);
 	% s-ti-bot: start time of T_i (drawn at the bottom)
 	\node (s-ti-bot) [cs] at ($(ti.south west) - (0.0cm, \ktwospace)$) {$s_i$};
 	\draw[dashline] let \p{p-ti} = (ti.west), \p{p-x4} = (x4.west) in
@@ -89,7 +85,7 @@
     \end{scope}
   }
 
-  \uncover<4->{
+  \uncover<5->{
     % k3
     \begin{scope}
 	% (invisible; as positioning anchor) s-ti-mid: start time of T_i (drawn in the middle)
