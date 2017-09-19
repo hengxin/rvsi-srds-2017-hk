@@ -1,36 +1,33 @@
 \begin{table}[!t]
   \centering
   \renewcommand*{\arraystretch}{1.2}
-  \caption{Three categories of workload parameters for experiments on Aliyun.}
-  % \resizebox{0.95\textwidth}{!}{%
-    { %
-  \begin{tabular}{|c|c||c|c|}
-	\hline
-    \multicolumn{2}{|c||}{\textbf{Parameter}} & \textbf{Value}		& \textbf{Explanation}
-	\\ \hline  \hline
-    \multirow{6}{*}{\bf Transaction-related}
-    &\#keys  						& 25 = 5 (rows) $\times$ 5 (columns)  	&  	size of keyspace
-	\\ \cline{2-4}
-	&\#clients						& 5, 10, 15, 20, 25, 30 & number of clients
-    \\ \cline{2-4}
-	&\#txs/client					& 1000 & number of transactions per client
-	\\ \cline{2-4}
-	&\#ops/tx				& $\sim$ Binomial(20, 0.5) &  number of operations per transaction
-	\\ \cline{2-4}
-	&rwRatio							& 1:2, 1:1, 4:1 & {\#reads}/{\#writes}
-	\\ \cline{2-4}
-	&zipfExponent					& 1		& parameter for Zipfian distribution
-	\\ \hline  \hline
-    \multirow{3}{*}{\bf Execution-related} & minInterval						& 0ms		& minimum inter-transaction time
-	\\ \cline{2-4}
-	&maxInterval						& 10ms		& maximum inter-transaction time
-	\\ \cline{2-4}
-	&meanInterval					& 5ms		& mean inter-transaction time
+  \resizebox{0.85\textwidth}{!}{%
+  \begin{tabular}{|c||c|c|}
+    \hline
+    \textbf{Parameter} & \textbf{Value}		& \textbf{Explanation}
+    \\ \hline  \hline
+    \#keys  				& 25 = 5 (rows) $\times$ 5 (columns)  	&  
+    \\ \hline
+    \textcolor<2->{red}{\#clients}	& 5, 10, 15, 20, 25, 30 & 
+    \\ \hline
+    \#txs/client			& 1000 & 
+    \\ \hline
+    \#ops/tx				& $\sim$ Binomial(20, 0.5) &  
+    \\ \hline
+    \textcolor<2->{red}{rwRatio}	& 1:2, 1:1, 4:1 & {\#reads}/{\#writes}
+    \\ \hline
+    zipfExponent			& 1		& \innercell{c}{parameter for \\ Zipfian distribution}
+    \\ \hline  \hline
+    minInterval				& 0ms		
+    			& \multirow{3}{*}{\innercell{c}{min/max/mean \\ inter-transaction time}}
+    \\ \cline{1-2}
+    maxInterval				& 10ms		& 
+    \\ \cline{1-2}
+    meanInterval			& 5ms		& 
     \\ \hline \hline
-    {\bf RVSI-related} & $(k_1, k_2, k_3)$		
-		&  \innercell{c}{(1,0,0) (1,1,0) (1,1,1) \\ (2,0,0) (2,0,1) (2,1,1)}	
-		&  for $\konebv{}$, $\ktwofv{}$, and $\kthreesv{}$
-	\\ \hline
+    \textcolor<2->{red}{$(k_1, k_2, k_3)$}
+    &  \innercell{c}{(1,0,0) (1,1,0) (1,1,1) \\ (2,0,0) (2,0,1) (2,1,1)}	
+    &  
+    \\ \hline
   \end{tabular}}
-  % }
 \end{table}
