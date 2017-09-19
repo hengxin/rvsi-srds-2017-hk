@@ -1,0 +1,21 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% For masters %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{algorithm}{1}
+\begin{algorithm}[H]
+  \caption{\rvsimp{} for Executing Transaction $T$ \red{(Master)}.}
+  \begin{algorithmic}[1]
+    \Procedure{prepare}{$T.\attr{writes}, T.\attr{vc}$} \label{line:rvsimp-prepare}
+      \State \Return \red{\Call{check-vc}{$T.\attr{vc}$}} \&\& write-conflict freedom
+		\label{line:rvsimp-check-in-prepare}
+    \EndProcedure
+
+	\Procedure{commit}{$T.\attr{cts}, T.\attr{writes}$}	\label{line:rvsimp-commit}
+	  \lComment{apply $T.\attr{writes}$ locally and propagate it} 
+		\label{line:rvsimp-apply-in-commit}
+    \EndProcedure
+
+	\Procedure{abort}{\null}  \label{line:rvsimp-abort}
+	\lComment{abort}
+    \EndProcedure
+  \end{algorithmic}
+\end{algorithm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% For masters %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

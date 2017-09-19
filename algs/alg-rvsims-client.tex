@@ -1,0 +1,26 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% For clients %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{algorithm}{0}
+\begin{algorithm}[H]
+  \caption{\rvsims{} Protocol for Executing Transaction $T$ \red{(Client)}.}
+  \begin{algorithmic}[1]
+    \Procedure{begin}{\null}
+    \State $T.\attr{sts}$ $\gets$ \algkeyword{rpc-call} \Call{start}{\null} at master 
+    $\master$   \label{line:call-start}
+    \EndProcedure
+
+    \Procedure{read}{$x$}
+      \State $x.\attr{ver}$ $\gets$ \algkeyword{rpc-call} \Call{read}{$x$} at any site
+    \EndProcedure
+
+    \Procedure{write}{$x, v$}
+      \State add $(x, v)$ to $T.\attr{writes}$ \label{line:write-at-client}
+    \EndProcedure
+
+    \Procedure{end}{$T$}
+    \State \red{$T.\attr{vc}$ $\gets$ \Call{add-vc}{\null}} \label{line:call-add-vc}
+    \State $c/a$ $\gets$ \algkeyword{rpc-call} \Call{commit}{$T.\attr{writes}, 
+    T.\attr{vc}$} at $\master$ \label{line:call-commit}
+    \EndProcedure
+  \end{algorithmic}
+\end{algorithm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% For clients %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

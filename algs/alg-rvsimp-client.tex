@@ -1,0 +1,18 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% For clients %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{algorithm}{1}
+\begin{algorithm}[H]
+  \caption{\rvsimp{} for Executing Transaction $T$ \red{(Client)}.}
+  \begin{algorithmic}[1]
+    \Procedure{begin}{\null}
+	\State \Return \algkeyword{rpc-call} \Call{getTS}{\null} at $\timeoracle{}$
+		\label{line:rvsimp-client-call-getts}
+    \EndProcedure
+
+    \Procedure{end}{\null}	\label{line:rvsimp-call-end}
+      \State $T.\attr{vc}$ $\gets$ \red{\Call{add-vc}{\null}} \label{line:rvsimp-call-add-vc}
+      \State $c/a$ $\gets$ \algkeyword{rpc-call} \Call{c-commit}{$T.\attr{writes}, T.\attr{vc}$} 
+      at $\coordinator$ \label{line:rvsimp-call-commit}
+    \EndProcedure
+  \end{algorithmic}
+\end{algorithm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% For clients %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

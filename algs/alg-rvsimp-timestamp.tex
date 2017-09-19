@@ -1,0 +1,13 @@
+%%%%%%%%%%%%%%%%%%%% For Timestamp Oracle %%%%%%%%%%%%%%%%%%%%
+\setcounter{algorithm}{1}
+\begin{algorithm}[H]
+  \caption{\rvsimp{} for Executing Transaction $T$ \red{(Timestamp Oracle)}.}
+  \begin{algorithmic}[1]
+    \Statex \tots{}: for start-timestamps and commit-timestamps
+
+    \Procedure{getTS}{\null}	\label{line:rvsimp-getts}
+      \State \Return ++\tots{}
+    \EndProcedure
+  \end{algorithmic}
+\end{algorithm}
+%%%%%%%%%%%%%%%%%%%% For Timestamp Oracle %%%%%%%%%%%%%%%%%%%%

@@ -1,0 +1,24 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% For slaves %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{algorithm}{0}
+\begin{algorithm}[H]
+  \caption{\rvsims{} Protocol for Executing Transaction $T$ \red{(Slave)}.}
+  \begin{algorithmic}[1]
+    \Statex $x.\attr{ver} = (x.\attr{ts}, x.\attr{ord}, x.\attr{val})$: the latest version of $x$
+    \hStatex
+
+    \Procedure{read}{$x$}
+    \State \Return $x.\attr{ver}$
+    \EndProcedure
+
+    \algrenewcommand\algorithmicprocedure{\textbf{upon}}
+    \Procedure{received}{\msg{PROP}{T.\textrm{\it upvers}}} \label{line:received}
+    \For{$\left(x.\attr{ver}' = (x.\attr{ts}', x.\attr{ord}', x.\attr{val}')\right) \in 
+    T.\textrm{\it upvers}$}
+      \If{$x.\attr{ord}' > x.\attr{ord}$}  
+      \State $x.\attr{ver} \gets x.\attr{ver}'$
+      \EndIf
+    \EndFor
+    \EndProcedure
+  \end{algorithmic}
+\end{algorithm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% For slaves %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

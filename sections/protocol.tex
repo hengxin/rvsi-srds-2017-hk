@@ -5,7 +5,7 @@
 % the RVSI-MS protocol
 %%%%%%%%%%%%%%%
 \begin{frame}{}
-  \centerline{\textbf{\rvsims{}}: RVSI protocol for master-slave replication}
+  \centerline{\rvsims{}: RVSI protocol for master-slave replication}
 
   \vspace{1.0cm}
   In terms of \emph{event} generation and handling:
@@ -19,13 +19,75 @@
 
 %%%%%%%%%%%%%%%
 \begin{frame}{}
-  TikZ overlay for \rvsims{}
+  \begin{center}
+    \input{tikz/rvsims}
+  \end{center}
 \end{frame}
 %%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%
 \begin{frame}{}
-  Calculating version constraints:
+  Calculating version constraints for \rvsi{}: 
+
+  \[
+    \mathcal{O}_{x}(t) = \text{\# of versions of } x \text{ before time } t % \max \set{x.\attr{ord} \mid x.\attr{ts} \le t}
+  \]
+
+  \[
+    \blue{r_i(x_j) \in T_i}
+  \]
+  \vspace{-0.40cm}
+  \begin{description}
+    \item[$\konebv$:]
+      \[
+	\mathcal{O}_{x}(T_i.\textsl{sts}) - \mathcal{O}_{x}(T_j.\textsl{cts}) < k_1
+      \]
+    \item[$\ktwofv$:]
+      \[
+	\mathcal{O}_{x}(T_j.\textsl{cts}) - \mathcal{O}_{x}(T_i.\textsl{sts}) \le k_2
+      \]
+    \pause
+    \item[$\kthreesv$:]
+      \[
+	\blue{r_i(x_j), r_i(y_l) \in T_i}
+      \]
+      \vspace{-0.40cm}
+      \[
+	\mathcal{O}_{\red{x}}(T_l.\textsl{cts}) - \mathcal{O}_{\red{x}}(T_j.\textsl{cts}) \le k_3
+      \]
+  \end{description}
+\end{frame}
+%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%
+\begin{frame}{}
+  \begin{center}
+    \begin{minipage}{1.0\textwidth}
+      \input{algs/alg-rvsims-client}
+    \end{minipage}
+  \end{center}
+\end{frame}
+%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%
+\begin{frame}{}
+  \begin{center}
+    \scalebox{0.85}{
+      \begin{minipage}{1.0\textwidth}
+	\input{algs/alg-rvsims-master}
+      \end{minipage}
+    }
+  \end{center}
+\end{frame}
+%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%
+\begin{frame}{}
+  \begin{center}
+    \begin{minipage}{1.0\textwidth}
+      \input{algs/alg-rvsims-slave}
+    \end{minipage}
+  \end{center}
 \end{frame}
 %%%%%%%%%%%%%%%
 
@@ -33,49 +95,101 @@
 %%%%%%%%%%%%%%%
 \begin{frame}{}
   \begin{center}
-    Distributed transactions spanning multiple masters need to be committed atomically.
+    Distributed transactions spanning multiple masters \\
+    need to be committed atomically.
 
     \pause
+    \vspace{0.40cm}
     Using the two-phase commit (2PC) protocol.
+
+    \pause
+    \vspace{1.00cm}
+    Two issues to address
   \end{center}
 \end{frame}
 %%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%
 \begin{frame}{}
-  Assumes a timestamp oracle:
-  \begin{description}
-    \item[Clients:] 
-    \item[Masters:]
+  Assumes a timestamp oracle \citeinbeamer{Peng}{OSDI}{10}:
+  \begin{description}[Coordinator:]
+    \item[Client:] asks for the start-timestamp in \textsc{Begin}
+    \item[Coordinator:] asks for the commit-timestamp in \textsc{Commit}
   \end{description}
 \end{frame}
 %%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%
 \begin{frame}{}
-  \rvsi{} version constraints in 2PC protocol:
+  Split the \rvsi{} version constraints according to partitions:
+
+  \[
+    \blue{r_i(x_j) \in T_i}
+  \]
+  \vspace{-0.40cm}
   \begin{description}
     \item[$\konebv$:]
+      \[
+	\mathcal{O}_{\red{x}}(T_i.\textsl{sts}) - \mathcal{O}_{\red{x}}(T_j.\textsl{cts}) < k_1
+      \]
     \item[$\ktwofv$:]
+      \[
+	\mathcal{O}_{\red{x}}(T_j.\textsl{cts}) - \mathcal{O}_{\red{x}}(T_i.\textsl{sts}) \le k_2
+      \]
     \item[$\kthreesv$:]
+      \[
+	\blue{r_i(x_j), r_i(y_l) \in T_i}
+      \]
+      \vspace{-0.40cm}
+      \[
+	\mathcal{O}_{\red{x}}(T_l.\textsl{cts}) - \mathcal{O}_{\red{x}}(T_j.\textsl{cts}) \le k_3
+      \]
   \end{description}
+
+  \vspace{0.6cm}
+  \centerline{All version constraints involve only one data item.}
 \end{frame}
 %%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%
 \begin{frame}{}
-  \begin{figure}[t]
-    \input{algs/alg-rvsims}
-    % \resizebox{0.90\linewidth}{!}{\input{algs/alg-rvsims.tex}}
-  \end{figure}
+  \begin{center}
+    \begin{minipage}{1.0\textwidth}
+      \input{algs/alg-rvsimp-client}
+    \end{minipage}
+  \end{center}
 \end{frame}
 %%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%
 \begin{frame}{}
-  \begin{figure}[t]
-    \input{algs/alg-rvsimp}
-  \end{figure}
+  \begin{center}
+    \begin{minipage}{1.0\textwidth}
+      \input{algs/alg-rvsimp-timestamp}
+    \end{minipage}
+  \end{center}
+\end{frame}
+%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%
+\begin{frame}{}
+  \begin{center}
+    \scalebox{0.90}{
+      \begin{minipage}{1.0\textwidth}
+	\input{algs/alg-rvsimp-coord}
+      \end{minipage}
+    }
+  \end{center}
+\end{frame}
+%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%
+\begin{frame}{}
+  \begin{center}
+    \begin{minipage}{1.0\textwidth}
+      \input{algs/alg-rvsimp-master}
+    \end{minipage}
+  \end{center}
 \end{frame}
 %%%%%%%%%%%%%%%
 

@@ -1,0 +1,40 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% For master %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{algorithm}{0}
+\begin{algorithm}[H]
+  \caption{\rvsims{} Protocol for Executing Transaction $T$ \red{(Master)}.}
+  \begin{algorithmic}[1]
+    \Statex $\master$.\attr{ts}: for start-timestamps and commit-timestamps
+    \Statex $\set{x.\attr{ver} = (x.\attr{ts}, x.\attr{ord}, x.\attr{val})}$: set of versions of $x$
+    \hStatex
+
+    \Procedure{start}{\null}
+    \State \Return ++$\master.\attr{ts}$
+    \EndProcedure
+    
+    \Procedure{read}{$x$}
+      \State \Return the latest $x.\attr{ver}$ installed \label{line:read-at-master}
+    \EndProcedure
+
+    \Procedure{commit}{$T.\attr{writes}, T.\attr{vc}$}
+    \If{\red{\Call{check-vc}{$T.\attr{vc}$}} \&\& write-conflict freedom}   
+    \label{line:call-check-vc}
+      \State $T.\attr{cts}$ $\gets$ ++$\master.\attr{ts}$ 
+
+      \lComment{apply $T.\attr{writes}$ locally and propagate it} 
+      \State $T.\textrm{\it upvers} = \emptyset$  \mComment{collect updated versions}  
+      \label{line:commit-updates}
+      \For{$(x,v) \in T.\attr{writes}$}    
+      \State $x.\attr{new-ver} \gets (T.\attr{cts}, \textrm{++}x.\attr{ord}, v)$
+      \State add $x.\attr{new-ver}$ to $\set{x.\attr{ver}}$ and $T.\textrm{\it upvers}$
+      \EndFor 
+      \State \algkeyword{broadcast} \msg{PROP}{T.\textrm{\it upvers}} to slaves 
+      \label{line:commit-prop}
+      % \lendComment{apply $T.\attr{writes}$ locally and propagate it} 
+
+      \State \Return $c$ denoting ``committed''
+    \EndIf
+    \State \Return $a$ denoting ``aborted''
+    \EndProcedure
+  \end{algorithmic}
+\end{algorithm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% For master %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

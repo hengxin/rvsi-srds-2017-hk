@@ -1,0 +1,39 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% For coordinator %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{algorithm}{1}
+\begin{algorithm}[H]
+  \caption{\rvsimp{} for Executing Transaction $T$ \red{(Coordinator)}.}
+  \begin{algorithmic}[1]
+      \Procedure{c-commit}{$T.\attr{writes}, T.\attr{vc}$}	\label{line:rvsimp-ccommit}
+	\State \red{split $T.\attr{writes}$ and $\tvc{T}$ with the data partitioning strategy}
+	  \label{line:rvsimp-partition}
+	  \hStatex
+
+      \lComment{the prepare phase:}
+	  \State \algkeyword{rpc-call} \Call{prepare}{$T.\attr{writes}, T.\attr{vc}$} at each $\master$
+		\label{line:rvsimp-call-prepare}
+
+      \lComment{the commit phase:}
+      \If{all \Call{prepare}{$T.\attr{writes}, T.\attr{vc}$} return \textsl{true}}
+		\label{line:rvsimp-prepare-all-true}
+	  \State $T.\attr{cts} \gets$ \algkeyword{rpc-call} 
+		\Call{getTS}{\null} at $\timeoracle$
+		  \label{line:rvsimp-coord-call-getts}
+		\State \algkeyword{rpc-call} \Call{commit}{$T.\attr{cts}, T.\attr{writes}$} at each $\master$
+		  \label{line:rvsimp-coord-call-commit}
+		%   \lComment{early commit notification~\cite{binnig:vldb14}}
+        % \State \Return $c$ denoting ``commited''    
+      \Else
+        \State \algkeyword{rpc-call} \Call{abort}{\null} at each $\master$
+		  \label{line:rvsimp-coord-call-abort}
+        \State \Return $a$ denoting ``aborted''
+      \EndIf
+
+	  \If{all \Call{commit}{$T.\attr{cts}, T.\attr{writes}$} return \textsl{true}}
+        \State \Return $c$ denoting ``committed''
+	  \Else
+		\State \Return $a$ denoting ``aborted''
+      \EndIf
+    \EndProcedure
+  \end{algorithmic}
+\end{algorithm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% For coordinator %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
