@@ -1,45 +1,52 @@
 \section{Related Work}
 
+%%%%%%%%%%%%%%%
 \begin{frame}{}
-  Inspired by 
-\end{frame}
+  The idea of \red{``bounded transactional inconsistency''} is partially inspired by the work on 
+  \begin{itemize}
+    \item Relaxed Currency and Consistency (C\&C) semantics \citeinbeamer{Guo}{SIGMOD}{04}
+    \item Relaxed Currency Serializability (RC-SR) \citeinbeamer{Bernstein}{SIGMOD}{06}
+  \end{itemize}
 
-%%%%%%%%%%%%%%%
-\begin{frame}{}
-\end{frame}
-%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%
-\begin{frame}{}
-\end{frame}
-%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%
-\begin{frame}{}
+  \vspace{0.80cm}
+  Two differences:
+  \begin{itemize}
+    \item Serializability (SR) \emph{vs.} SI
+    \item Currency in real-time \emph{vs.} Versions in order
+  \end{itemize}
 \end{frame}
 %%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%
 \begin{frame}{}
+  Bounded transactional inconsistency (others):
+  \begin{description}[$N$-ignorant System]
+    \setlength{\itemsep}{8pt}
+    \item[Epsilon-SR] inconsistency introduced by concurrent update transactions
+      \citeinbeamer{Pu}{SIGMOD}{91} \citeinbeamer{Ramamritham}{TKDE}{95}
+      \begin{itemize}
+	\item uncommitted \emph{vs.} RC (for \rvsi{})
+      \end{itemize}
+    \item[$N$-ignorant System] ignorant of $\le K$ ``prior'' transactions
+      \citeinbeamer{Krishnakumar}{PODS}{91}
+      \begin{itemize}
+	\item SR \emph{vs.} SI (for \rvsi{})
+      \end{itemize}
+  \end{description}
 \end{frame}
 %%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%
 \begin{frame}{}
-\end{frame}
-%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%
-\begin{frame}{}
-\end{frame}
-%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%
-\begin{frame}{}
-\end{frame}
-%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%
-\begin{frame}{}
+  Dynamic consistency choices:
+  \begin{description}[Parameterized]
+    \setlength{\itemsep}{8pt}
+    \item[Parameterized] ESR, $N$-ignorant, RC-SR, C\&C semantics, \red{\rvsi{}}
+    \item[Pileus] strong, intermediate, and eventual consistency \citeinbeamer{Kotla}{MSR-TR}{2013}
+    \item[\textsc{SIEVE}] a tool automating the choice of consistency levels \citeinbeamer{Li}{ATC}{14} \\
+      {\small (based on the theory of RedBlue consistency \citeinbeamer{Li}{OSDI}{12})}
+    \item[Salt] combining ACID and BASE transactions \citeinbeamer{Xie}{OSDI}{14}
+    \item[Multi-level] a transaction model supporting four consistency levels \citeinbeamer{Tripathi}{BigData}{15}
+  \end{description}
 \end{frame}
 %%%%%%%%%%%%%%%
