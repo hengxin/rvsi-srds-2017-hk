@@ -5,20 +5,19 @@
   The idea of \red{\large ``parameterized and runtime-tunable snapshot isolation''}.
 
   \vspace{0.50cm}
+  \rvsi{}: Relaxed Version Snapshot Isolation
+  \begin{description}
+    \item[$\konebv$:] $k_1$-version bounded \emph{\blue{backward}} view
+    \item[$\ktwofv$:] $k_2$-version bounded \emph{\blue{forward}} view
+    \item[$\kthreesv$:] $k_3$-version bounded \emph{\blue{snapshot}} view
+  \end{description}
+
+  \vspace{10pt}
+  \chameleon{} prototype: distributed transactional key-value store
   \begin{itemize}
-    \setlength{\itemsep}{10pt}
-    \item \rvsi{}: Relaxed Version Snapshot Isolation
-      \begin{description}
-	\item[$\konebv$:] $k_1$-version bounded \emph{\blue{backward}} view
-	\item[$\ktwofv$:] $k_2$-version bounded \emph{\blue{forward}} view
-	\item[$\kthreesv$:] $k_3$-version bounded \emph{\blue{snapshot}} view
-      \end{description}
-    \item \chameleon{} prototype: distributed transactional key-value store
-      \begin{itemize}
-	\item achieves \rvsi{}
-	\item allows each transaction to tune its consistency level at runtime
-	\item evaluates the impacts of \rvsi{} on the transaction abort rates
-      \end{itemize}
+    \item Achieves \rvsi{}
+    \item Allows each transaction to tune its consistency level at runtime
+    \item Evaluates the impacts of \rvsi{} on the transaction abort rates
   \end{itemize}
 \end{frame}
 %%%%%%%%%%%%%%%

@@ -1,35 +1,17 @@
 \usepackage{xeCJK}
-% \usepackage{zhnumber}	% counters in Chinese
 \usepackage{fontspec}
-\usepackage{comment}
-\usepackage{xifthen}
-\usepackage{verbatim}
-\usepackage{lmodern}
 
-\usetheme{CambridgeUS} % try Madrid
+\usepackage{perpage} %the perpage package
+\MakePerPage{footnote} %the perpage package command
+
+\usetheme{CambridgeUS} % try Madrid 
 \usecolortheme{beaver} % try beaver, dolphin, seahorse
 \usefonttheme[onlymath]{serif} % try "professionalfonts"
-% \setCJKmainfont{SimSun} % try SimSun
 
 \usepackage{tikz}
 \usetikzlibrary{chains, arrows.meta, shapes, positioning, calc, backgrounds, fit}
 
 \usepackage{amsmath, amsfonts, amssymb, mathtools, pifont}
-\newcommand{\cmark}{\ding{51}}%
-\newcommand{\xmark}{\ding{55}}%
-\def\checkmark{\tikz\fill[scale=0.5](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;} 
-
-\usepackage{graphicx, subcaption}
-\usepackage[export]{adjustbox}
-
-\usepackage[framemethod=TikZ]{mdframed}
-
-\usepackage[normalem]{ulem} % strike through text
-\newcommand{\soutthick}[1]{%
-    \renewcommand{\ULthickness}{2.0pt}%
-       \sout{#1}%
-    \renewcommand{\ULthickness}{.4pt}% Resetting to ulem default
-}
 
 \setbeamersize{text margin left = 2em, text margin right = 1em}
 \setbeamercolor{footnote mark}{fg = teal}
