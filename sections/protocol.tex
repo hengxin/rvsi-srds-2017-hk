@@ -5,23 +5,20 @@
 % the RVSI-MS protocol
 %%%%%%%%%%%%%%%
 \begin{frame}{}
-  \centerline{\rvsims{}: RVSI protocol for master-slave replication}
+  \centerline{\rvsims{}: RVSI protocol for Master-Slave replication}
 
-  \vspace{1.0cm}
-  In terms of \emph{event} generation and handling:
-  \begin{description}
-    \item[Clients:] \ebegin, \eread, \ewrite, \eend%
-    \item[Master:] \estart, \ecommit, \esend%
-    \item[Slaves:] \ereceive%
-  \end{description}
-\end{frame}
-%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%
-\begin{frame}{}
+  \vspace{-0.80cm}
   \begin{center}
-    \input{tikz/rvsims}
+    \resizebox{0.50\textwidth}{!}{\input{tikz/rvsims}}
   \end{center}
+
+%   \vspace{1.0cm}
+%   In terms of \emph{event} generation and handling:
+%   \begin{description}
+%     \item[Clients:] \ebegin, \eread, \ewrite, \eend%
+%     \item[Master:] \estart, \ecommit, \esend%
+%     \item[Slaves:] \ereceive%
+%   \end{description}
 \end{frame}
 %%%%%%%%%%%%%%%
 
@@ -59,42 +56,11 @@
 \end{frame}
 %%%%%%%%%%%%%%%
 
-%%%%%%%%%%%%%%%
-\begin{frame}{}
-  \begin{center}
-    \begin{minipage}{1.0\textwidth}
-      \input{algs/alg-rvsims-client}
-    \end{minipage}
-  \end{center}
-\end{frame}
-%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%
-\begin{frame}{}
-  \begin{center}
-    \scalebox{0.85}{
-      \begin{minipage}{1.0\textwidth}
-	\input{algs/alg-rvsims-master}
-      \end{minipage}
-    }
-  \end{center}
-\end{frame}
-%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%
-\begin{frame}{}
-  \begin{center}
-    \begin{minipage}{1.0\textwidth}
-      \input{algs/alg-rvsims-slave}
-    \end{minipage}
-  \end{center}
-\end{frame}
-%%%%%%%%%%%%%%%
-
 % the RVSI-MP protocol
 %%%%%%%%%%%%%%%
 \begin{frame}{}
   \begin{center}
+    \rvsimp{}: \rvsi{} protocol for Multiple Partitions\\[10pt]
     Distributed transactions spanning multiple masters \\
     need to be committed atomically.
 
@@ -104,7 +70,7 @@
 
     \pause
     \vspace{1.00cm}
-    Two issues to address
+    We have two issues to address.
   \end{center}
 \end{frame}
 %%%%%%%%%%%%%%%
@@ -148,47 +114,5 @@
 
   \vspace{0.6cm}
   \centerline{All version constraints involve only one data item.}
-\end{frame}
-%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%
-\begin{frame}{}
-  \begin{center}
-    \begin{minipage}{1.0\textwidth}
-      \input{algs/alg-rvsimp-client}
-    \end{minipage}
-  \end{center}
-\end{frame}
-%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%
-\begin{frame}{}
-  \begin{center}
-    \begin{minipage}{1.0\textwidth}
-      \input{algs/alg-rvsimp-timestamp}
-    \end{minipage}
-  \end{center}
-\end{frame}
-%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%
-\begin{frame}{}
-  \begin{center}
-    \scalebox{0.90}{
-      \begin{minipage}{1.0\textwidth}
-	\input{algs/alg-rvsimp-coord}
-      \end{minipage}
-    }
-  \end{center}
-\end{frame}
-%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%
-\begin{frame}{}
-  \begin{center}
-    \begin{minipage}{1.0\textwidth}
-      \input{algs/alg-rvsimp-master}
-    \end{minipage}
-  \end{center}
 \end{frame}
 %%%%%%%%%%%%%%%

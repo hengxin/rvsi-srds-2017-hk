@@ -1,0 +1,129 @@
+\appendix
+
+%%%%%%%%%%%%%%%
+\begin{frame}{}
+  \resizebox{1.00\textwidth}{!}{\input{tikz/rvsi-def}}
+\end{frame}
+%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%
+\begin{frame}{Applicability}
+\end{frame}
+%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%
+\begin{frame}{}
+  \begin{center}
+    \begin{minipage}{1.0\textwidth}
+      \input{algs/alg-rvsims-client}
+    \end{minipage}
+  \end{center}
+\end{frame}
+%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%
+\begin{frame}{}
+  \begin{center}
+    \scalebox{0.85}{
+      \begin{minipage}{1.0\textwidth}
+	\input{algs/alg-rvsims-master}
+      \end{minipage}
+    }
+  \end{center}
+\end{frame}
+%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%
+\begin{frame}{}
+  \begin{center}
+    \begin{minipage}{1.0\textwidth}
+      \input{algs/alg-rvsims-slave}
+    \end{minipage}
+  \end{center}
+\end{frame}
+%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%
+\begin{frame}{}
+  \begin{center}
+    \begin{minipage}{1.0\textwidth}
+      \input{algs/alg-rvsimp-client}
+    \end{minipage}
+  \end{center}
+\end{frame}
+%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%
+\begin{frame}{}
+  \begin{center}
+    \begin{minipage}{1.0\textwidth}
+      \input{algs/alg-rvsimp-timestamp}
+    \end{minipage}
+  \end{center}
+\end{frame}
+%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%
+\begin{frame}{}
+  \begin{center}
+    \scalebox{0.90}{
+      \begin{minipage}{1.0\textwidth}
+	\input{algs/alg-rvsimp-coord}
+      \end{minipage}
+    }
+  \end{center}
+\end{frame}
+%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%
+\begin{frame}{}
+  \begin{center}
+    \begin{minipage}{1.0\textwidth}
+      \input{algs/alg-rvsimp-master}
+    \end{minipage}
+  \end{center}
+\end{frame}
+%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%
+\begin{frame}{}
+  Atomicity of the commit-timestamps:
+
+  \fignocaption{width = 0.70\textwidth}{figs/rvsi-atomic-cts.pdf}
+\end{frame}
+%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%
+\begin{frame}{Delays}
+  (One-way) delays among nodes~\footnotemark:
+  \begin{description}[Across datacenters:]
+    \item[Within datacenter:] $1 \sim 2$ms
+    \item[Across datacenters:] $15 \sim 25$ms
+    \item[Clients to nodes:] $15 \sim 20$ms
+  \end{description}
+
+  \footnotetext{\url{https://github.com/hengxin/aliyun-ping-traces}}
+\end{frame}
+%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%
+\begin{frame}{Benchmarks}
+  \begin{itemize}
+    \item The TPC-C benchmark is commonly used to benchmark relational databases.
+    \item The YCSB benchmark \citeinbeamer{Cooper}{SoCC}{10} for distributed key-value stores
+      does not support transactions.
+  \end{itemize}
+
+  \vspace{0.60cm}
+  \centerline{We design our own workloads.}
+\end{frame}
+%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%
+\begin{frame}{}
+  \fignocaption{width = 0.80\textwidth}{figs/aliyun-vcwcf-allinone.pdf}
+\end{frame}
+%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%

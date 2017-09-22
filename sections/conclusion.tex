@@ -2,18 +2,18 @@
 
 %%%%%%%%%%%%%%%
 \begin{frame}{}
-  The idea of \red{\large ``parameterized and runtime-tunable snapshot isolation''}.
+  The idea of {\large ``\blue{parameterized} and \red{runtime-tunable} snapshot isolation''}.
 
   \vspace{0.50cm}
-  \rvsi{}: Relaxed Version Snapshot Isolation
+  \blue{\rvsi{}}: Relaxed Version Snapshot Isolation
   \begin{description}
-    \item[$\konebv$:] $k_1$-version bounded \emph{\blue{backward}} view
-    \item[$\ktwofv$:] $k_2$-version bounded \emph{\blue{forward}} view
-    \item[$\kthreesv$:] $k_3$-version bounded \emph{\blue{snapshot}} view
+    \item[$\konebv$:] $k_1$-version bounded backward view
+    \item[$\ktwofv$:] $k_2$-version bounded forward view
+    \item[$\kthreesv$:] $k_3$-version bounded snapshot view
   \end{description}
 
   \vspace{10pt}
-  \chameleon{} prototype: distributed transactional key-value store
+  \red{\chameleon{}}: a prototype distributed transactional key-value store
   \begin{itemize}
     \item Achieves \rvsi{}
     \item Allows each transaction to tune its consistency level at runtime
@@ -26,9 +26,8 @@
 \begin{frame}{}
   Possible future work:
   \begin{itemize}
-    \item Evaluate the impacts of \blue{$\kthreesv$} on transaction abort rates
-    \item Evaluate the \blue{performance} of \chameleon{} on realistic workloads
-    \item Study the impacts of \rvsi{} from the perspective of \blue{developers}
+    \item To evaluate the impacts of \blue{$\kthreesv$} on transaction abort rates
+    \item To study the impacts of \rvsi{} from the perspective of \blue{developers}
   \end{itemize}
 \end{frame}
 %%%%%%%%%%%%%%%

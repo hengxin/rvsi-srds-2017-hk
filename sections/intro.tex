@@ -8,7 +8,6 @@
 \end{frame}
 %%%%%%%%%%%%%%%
 
-% Distributed transactional key-value stores
 %%%%%%%%%%%%%%%
 \begin{frame}{}
   \begin{center}
@@ -26,8 +25,9 @@
 \begin{frame}{}
   Snapshot isolation (SI \citeinbeamer{Berenson}{SIGMOD}{95}, \citeinbeamer{Adya}{Thesis}{99}):
   \begin{itemize}
-    \item \red{Read} from the ``latest'' snapshot as of the time the transaction started
-    \item No \red{write}-conflicting concurrent transactions
+    \item Each transaction \red{reads} from the ``latest'' snapshot as of the time it started.
+    \item If multiple concurrent transactions \red{write} to the same data item,
+      at most one of them will commit. \hfill (WCF: \emph{write-conflict freedom})
   \end{itemize}
 \end{frame}
 %%%%%%%%%%%%%%%
@@ -117,19 +117,19 @@
 
 %%%%%%%%%%%%%%%
 \begin{frame}{}
-  The idea of \red{\large ``parameterized and runtime-tunable snapshot isolation''}.
+  The idea of {\large ``\red{parameterized} and \blue{runtime-tunable} snapshot isolation''}.
 
   \vspace{0.50cm}
-  \rvsi{}: Relaxed Version Snapshot Isolation
+  \red{\rvsi{}}: Relaxed Version Snapshot Isolation
   \begin{description}
-    \item[$\konebv$:] $k_1$-version bounded \emph{\blue{backward}} view
-    \item[$\ktwofv$:] $k_2$-version bounded \emph{\blue{forward}} view
-    \item[$\kthreesv$:] $k_3$-version bounded \emph{\blue{snapshot}} view
+    \item[$\konebv$:] $k_1$-version bounded \emph{\red{backward}} view
+    \item[$\ktwofv$:] $k_2$-version bounded \emph{\red{forward}} view
+    \item[$\kthreesv$:] $k_3$-version bounded \emph{\red{snapshot}} view
   \end{description}
 
   \pause
   \vspace{10pt}
-  \chameleon{} prototype: distributed transactional key-value store
+  \blue{\chameleon{}}: a prototype distributed transactional key-value store
   \begin{itemize}
     \item Achieves \rvsi{}
     \item Allows each transaction to tune its consistency level at runtime

@@ -11,8 +11,8 @@
   \vspace{0.50cm}
   \centerline{\red{What about performance?}}
   \begin{itemize}
-    \item Not done yet in this work
-    \item \rvsims{} and \rvsimp{} protocols in \chameleon{} are simple
+    \item Not reported in this work
+    \item \emph{Not} sensitive to parameters
   \end{itemize}
 \end{frame}
 %%%%%%%%%%%%%%%
@@ -28,23 +28,12 @@
 	\item Partition \& Replication
 	\item Clients in our lab~\footnotemark[2]
       \end{itemize}
-
-      \vspace{0.60cm}
-      \uncover<2->{
-	(One-way) delays among nodes~\footnotemark[3]:
-	\begin{description}[Across datacenters:]
-	  \item[Within datacenter:] $1 \sim 2$ms
-	  \item[Across datacenters:] $15 \sim 25$ms
-	  \item[Clients to nodes:] $15 \sim 20$ms
-	\end{description}
-      }
     \column{0.50\textwidth}
       \fignocaption{width = 0.85\textwidth}{figs/chameleon-arch.pdf}
   \end{columns}
 
   \footnotetext[1]{Located in East China, North China, and South China, respectively.}
   \footnotetext[2]{Located in East China.}
-  \footnotetext[3]{\url{https://github.com/hengxin/aliyun-ping-traces}}
 \end{frame}
 %%%%%%%%%%%%%%%
 
@@ -57,28 +46,20 @@
 
 %%%%%%%%%%%%%%%
 \begin{frame}{}
-  Transactions abort for two reasons:
-  \begin{itemize}
-    \item \red{``vc-aborted''}: \rvsi{} version constraints violated
-    \item \blue{``wcf-aborted''}: the WCF property violated
-  \end{itemize}
+  Roadmap:
+  \begin{enumerate}[<+->]
+    \setlength{\itemsep}{5pt}
+    \item Transaction abort rates because of \blue{violating the \rvsi{} version constraints}
+      are quite \red{\it sensitive} to different values of $k_1$, $k_2$, or $k_3$.
+    \item In the \blue{Aliyun scenarios}, most transactions have been aborted because of violating \red{$\ktwofv$}.
+    \item In \blue{controlled experiments}, the impacts of \red{$\konebv$} emerge when the ``issueDelay'' gets shorter.
+  \end{enumerate}
 
-  \pause
-  \vspace{0.60cm}
-  Transaction abort rates due to \red{``vc-aborted''} are \emph{sensitive} to different values of $k_1$, $k_2$, or $k_3$,
-  \pause
-  but those due to \blue{``wcf-aborted''} are not.
-
-  \pause
   \vspace{0.50cm}
-  \[
-    h \in \rvsi{} \iff h \in \red{\konebv{}} \cap \red{\ktwofv{}} \cap \red{\kthreesv{}} \cap \blue{\wcf{}}.
-  \]
-
-  \pause
-  \vspace{0.80cm}
-  \centerline{\red{We report the results 
-    under the read-frequent workloads~\footnote{\url{https://github.com/hengxin/chameleon-transactional-kvstore}}.}}
+  \uncover<4->{
+    \centerline{We report the results under the read-frequent 
+      (\#rwRatio = 4:1) workloads~\footnote{\url{https://github.com/hengxin/chameleon-transactional-kvstore}}.}
+  }
 \end{frame}
 %%%%%%%%%%%%%%%
 
@@ -100,7 +81,7 @@
   \fignocaption{width = 0.55\textwidth}{figs/aliyun-bvfvsv.pdf}
 
   \pause
-  Most ``vc-aborted'' transactions abort because of violating \red{$\ktwofv$}.
+  \centerline{Most ``vc-aborted'' transactions abort because of violating \red{$\ktwofv$}.}
   \[
     fv(1,0,0) = 0.1889 \implies fv(\blue{2},0,0) = 0.1866 \implies fv(1,\red{\bf 1},0) = 0.0064
   \]
@@ -110,11 +91,10 @@
 %%%%%%%%%%%%%%%
 \begin{frame}{}
   \begin{center}
-    \red{Question: when does $k_1$ for $\konebv$ take effect?} \\[10pt]
-    It seems that $\konebv$ has \emph{\red{little}} impact on the transaction abort rates. \\[30pt]
+    In the Aliyun scenarios, we saw \red{\it little} impacts of $\konebv$. \\[30pt]
+
     \pause
-    It may be the case in the Aliyun scenarios. \\[10pt]
-    \blue{What about other scenarios?}
+    We therefore explore the impacts of $\konebv$ in controlled experiments.
   \end{center}
 \end{frame}
 %%%%%%%%%%%%%%%
