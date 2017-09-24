@@ -9,11 +9,10 @@
 
   \pause
   \vspace{0.50cm}
-  \centerline{\red{What about performance?}}
-  \begin{itemize}
-    \item Not reported in this work
-    \item \emph{Not} sensitive to parameters
-  \end{itemize}
+  \begin{center}
+    \red{Performance} is \emph{not} reported in this work \\[5pt]
+    because it is \emph{not} sensitive to the parameters $k_1, k_2$ or $k_3$.
+  \end{center}
 \end{frame}
 %%%%%%%%%%%%%%%
 
@@ -21,7 +20,7 @@
 \begin{frame}{}
   \begin{columns}
     \column{0.50\textwidth}
-      \chameleon{} prototype on Aliyun:
+      \chameleon{} on Alibaba Cloud:
       \begin{itemize}
 	\item 3 datacenters~\footnotemark[1]
 	\item 3 nodes in each datacenter
@@ -39,19 +38,19 @@
 
 %%%%%%%%%%%%%%%
 \begin{frame}{}
-  \centerline{Three categories of workload parameters for experiments on Aliyun.}
+  \centerline{Workload parameters for the experiments on Alibaba Cloud.}
   \input{tables/rvsi-workload}
 \end{frame}
 %%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%
 \begin{frame}{}
-  Roadmap:
+  Overview:
   \begin{enumerate}[<+->]
     \setlength{\itemsep}{5pt}
-    \item Transaction abort rates because of \blue{violating the \rvsi{} version constraints}
+    \item Transaction abort rates because of \blue{violating the \rvsi{} version constraints} (``vc-aborted'')
       are quite \red{\it sensitive} to different values of $k_1$, $k_2$, or $k_3$.
-    \item In the \blue{Aliyun scenarios}, most transactions have been aborted because of violating \red{$\ktwofv$}.
+    \item In the \blue{Alibaba Cloud scenarios}, most transactions have been aborted because of violating \red{$\ktwofv$}.
     \item In \blue{controlled experiments}, the impacts of \red{$\konebv$} emerge when the ``issueDelay'' gets shorter.
   \end{enumerate}
 
@@ -67,7 +66,6 @@
 \begin{frame}{}
   \fignocaption{width = 0.80\textwidth}{figs/aliyun-vc-rf.pdf}
 
-  \pause
   The transaction abort rates due to ``vc-aborted'' \pause can be \red{greatly reduced}
   by \blue{slightly} increasing the values of $k_1$, $k_2$, or $k_3$:
   \[
@@ -80,8 +78,8 @@
 \begin{frame}{}
   \fignocaption{width = 0.55\textwidth}{figs/aliyun-bvfvsv.pdf}
 
-  \pause
   \centerline{Most ``vc-aborted'' transactions abort because of violating \red{$\ktwofv$}.}
+  \vspace{-0.50cm}
   \[
     fv(1,0,0) = 0.1889 \implies fv(\blue{2},0,0) = 0.1866 \implies fv(1,\red{\bf 1},0) = 0.0064
   \]
@@ -91,7 +89,7 @@
 %%%%%%%%%%%%%%%
 \begin{frame}{}
   \begin{center}
-    In the Aliyun scenarios, we saw \red{\it little} impacts of $\konebv$. \\[30pt]
+    In the Alibaba Cloud scenarios, we saw \red{\it little} impacts of $\konebv$. \\[30pt]
 
     \pause
     We therefore explore the impacts of $\konebv$ in controlled experiments.
@@ -132,38 +130,25 @@
 \end{frame}
 %%%%%%%%%%%%%%%
 
-% %%%%%%%%%%%%%%%
-% \begin{frame}{}
-%   \begin{description}[issueDelay = 20ms:]
-%     \setlength{\itemsep}{10pt}
-%     \item[issueDelay = 20ms:] $bv(1,0,0) = \red{0.0057} \quad\;\; fv(1,0,0) = 0.0251$
-%     \item[issueDelay = 15ms:] $bv(1,0,0) = \red{0.08225} \quad fv(1,0,0) = 0.0393$
-%     \item[issueDelay = 5ms:] $bv(1,0,0) = \red{0.1716} \quad\;\; fv(1,0,0) = 0.0045$
-%   \end{description}
-% 
-%   \pause
-%   \vspace{0.50cm}
-%   \begin{center}
-%     \blue{larger issueDelay} $\implies$ longer transaction \\[5pt]
-%     more concurrent transactions \\[5pt]
-%     more likely to obtain data versions updated by concurrent transactions \\[5pt]
-%     more sensitive to \blue{$\ktwofv$}
-%   \end{center}
-% \end{frame}
-% %%%%%%%%%%%%%%%
-
 %%%%%%%%%%%%%%%
 \begin{frame}{}
-  Generally, \rvsi{} \blue{\it helps to reduce the transaction abort rates}
-  when applications are willing to tolerate certain anomalies.
+  What about the impacts of $\kthreesv$?
+  \begin{itemize}
+    \item $\kthreesv$ involves multiple data items
+    \item Complex and challenging
+    \item Have not found any simple yet significant patterns
+  \end{itemize}
 
-  \pause
-  \vspace{0.6cm}
-  \begin{description}[<+->]
-    \setlength{\itemsep}{5pt}
-    \item[$\ktwofv$:] In the Aliyun scenarios, most transactions have been aborted because of violating $\ktwofv$.
-    \item[$\konebv$:] In controlled experiments, the impacts of $\konebv$ emerge when the ``issueDelay'' gets shorter.
-    \item[$\kthreesv$:] \uncover<4->{\textcolor{gray}{Complex and challenging (involving multiple data items)}}
-  \end{description}
+%   Generally, \rvsi{} \blue{\it helps to reduce the transaction abort rates}
+%   when applications are willing to tolerate certain anomalies.
+% 
+%   \pause
+%   \vspace{0.6cm}
+%   \begin{description}[<+->]
+%     \setlength{\itemsep}{5pt}
+%     \item[$\ktwofv$:] In the Alibaba Cloud scenarios, most transactions have been aborted because of violating $\ktwofv$.
+%     \item[$\konebv$:] In the controlled experiments, the impacts of $\konebv$ emerge when the ``issueDelay'' gets shorter.
+%     \item[$\kthreesv$:] \uncover<4->{\textcolor{gray}{Complex and challenging (involving multiple data items)}}
+%   \end{description}
 \end{frame}
 %%%%%%%%%%%%%%%

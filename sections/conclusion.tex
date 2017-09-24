@@ -4,18 +4,15 @@
 \begin{frame}{}
   The idea of {\large ``\blue{parameterized} and \red{runtime-tunable} snapshot isolation''}.
 
-  \vspace{0.50cm}
+  \vspace{0.80cm}
   \blue{\rvsi{}}: Relaxed Version Snapshot Isolation
-  \begin{description}
-    \item[$\konebv$:] $k_1$-version bounded backward view
-    \item[$\ktwofv$:] $k_2$-version bounded forward view
-    \item[$\kthreesv$:] $k_3$-version bounded snapshot view
-  \end{description}
+  \begin{equation*}
+    h \in \rvsi{} \iff h \in \konebv{} \cap \ktwofv{} \cap \kthreesv{} \cap \wcf{}
+  \end{equation*}
 
-  \vspace{10pt}
+  \vspace{0.30cm}
   \red{\chameleon{}}: a prototype distributed transactional key-value store
   \begin{itemize}
-    \item Achieves \rvsi{}
     \item Allows each transaction to tune its consistency level at runtime
     \item Evaluates the impacts of \rvsi{} on the transaction abort rates
   \end{itemize}
@@ -24,10 +21,11 @@
 
 %%%%%%%%%%%%%%%
 \begin{frame}{}
-  Possible future work:
+  Two possible future work:
   \begin{itemize}
-    \item To evaluate the impacts of \blue{$\kthreesv$} on transaction abort rates
-    \item To study the impacts of \rvsi{} from the perspective of \blue{developers}
+    \item To evaluate the impacts of \blue{$\kthreesv$} on transaction abort rates,
+      probably with data mining technologies
+    \item To study the impacts/anomalies of \rvsi{} from the perspectives of \blue{developers}
   \end{itemize}
 \end{frame}
 %%%%%%%%%%%%%%%

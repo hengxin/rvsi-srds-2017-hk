@@ -2,12 +2,76 @@
 
 %%%%%%%%%%%%%%%
 \begin{frame}{}
+  \begin{columns}
+    \column{0.50\textwidth}
+      Two transactions are \emph{concurrent} if
+      \[
+	s_i \timeprech c_j \land s_j \timeprech c_i
+      \]
+    \column{0.50\textwidth}
+      \fignocaption{width = 0.60\textwidth}{figs/concur-tx}
+  \end{columns}
+\end{frame}
+%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%
+\begin{frame}{}
   \resizebox{1.00\textwidth}{!}{\input{tikz/rvsi-def}}
 \end{frame}
 %%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%
+\begin{frame}{}
+  \begin{center}
+    An online bookstore application~\footnote{Adapted from \citeinbeamer{Guo}{SIGMOD}{04} 
+    and \citeinbeamer{Bernstein}{SIGMOD}{06}.} for motivating \\
+    \red{\large ``bounded inconsistency''} and \red{\large ``runtime-tuable''}:
+  \end{center}
+
+  \vspace{-0.20cm}
+  \begin{table}
+    \centering
+    \begin{tabular}{c|c|c|c|c|c|c}
+      \hline
+      Title & Authors & Sales & Inventory & Ratings & Reviews & $\cdots$ \\
+      \hline
+    \end{tabular}
+  \end{table}
+
+  \vspace{0.20cm}
+  \begin{description}[Bookstore Clerk ($T_2$):]
+    \setlength{\itemsep}{6pt}
+    \item[Customer ($T_1$):] Obtaining the basic info. about a book
+      \begin{itemize}
+	\item \emph{\blue{out-of-date}} reviews
+      \end{itemize}
+      \pause
+    \item[Bookstore Clerk ($T_2$):] Checking the inventory of a book
+      \begin{itemize}
+	\item updated by concurrent transactions that commit \emph{\blue{after}} $T_2$ starts
+      \end{itemize}
+      \pause
+    \item[Sales Analyst ($T_3$):] Studying sales vs. ratings of a book
+      \begin{itemize}
+	\item sales and ratings from \emph{\blue{separate snapshots}}
+      \end{itemize}
+  \end{description}
+\end{frame}
+%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%
 \begin{frame}{Applicability}
+\end{frame}
+%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%
+\begin{frame}{}
+  In terms of \emph{event} generation and handling:
+  \begin{description}
+    \item[Clients:] \ebegin, \eread, \ewrite, \eend%
+    \item[Master:] \estart, \ecommit, \esend%
+    \item[Slaves:] \ereceive%
+  \end{description}
 \end{frame}
 %%%%%%%%%%%%%%%
 
@@ -122,6 +186,26 @@
 %%%%%%%%%%%%%%%
 \begin{frame}{}
   \fignocaption{width = 0.80\textwidth}{figs/aliyun-vcwcf-allinone.pdf}
+\end{frame}
+%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%
+\begin{frame}{}
+  \begin{description}[issueDelay = 20ms:]
+    \setlength{\itemsep}{10pt}
+    \item[issueDelay = 20ms:] $bv(1,0,0) = \red{0.0057} \quad\;\; fv(1,0,0) = 0.0251$
+    \item[issueDelay = 15ms:] $bv(1,0,0) = \red{0.08225} \quad fv(1,0,0) = 0.0393$
+    \item[issueDelay = 5ms:] $bv(1,0,0) = \red{0.1716} \quad\;\; fv(1,0,0) = 0.0045$
+  \end{description}
+
+  \pause
+  \vspace{0.50cm}
+  \begin{center}
+    \blue{larger issueDelay} $\implies$ longer transaction \\[5pt]
+    more concurrent transactions \\[5pt]
+    more likely to obtain data versions updated by concurrent transactions \\[5pt]
+    more sensitive to \blue{$\ktwofv$}
+  \end{center}
 \end{frame}
 %%%%%%%%%%%%%%%
 
