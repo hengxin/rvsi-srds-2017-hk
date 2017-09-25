@@ -16,12 +16,6 @@
 
 %%%%%%%%%%%%%%%
 \begin{frame}{}
-  \resizebox{1.00\textwidth}{!}{\input{tikz/rvsi-def}}
-\end{frame}
-%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%
-\begin{frame}{}
   \begin{center}
     An online bookstore application~\footnote{Adapted from \citeinbeamer{Guo}{SIGMOD}{04} 
     and \citeinbeamer{Bernstein}{SIGMOD}{06}.} for motivating \\
@@ -61,6 +55,22 @@
 
 %%%%%%%%%%%%%%%
 \begin{frame}{Applicability}
+\end{frame}
+%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%
+\begin{frame}{}
+  \resizebox{1.00\textwidth}{!}{\input{tikz/rvsi-def}}
+\end{frame}
+%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%
+\begin{frame}{}
+  For convenience, the definition of \rvsi{} specifies the bounds
+  $k_1$, $k_2$, and $k_3$ globally w.r.t a history.
+
+  However, they can be easily generalized to support dynamic bounds per transaction
+  or even w.r.t each individual read operation or every pair of them.
 \end{frame}
 %%%%%%%%%%%%%%%
 
