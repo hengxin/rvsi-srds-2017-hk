@@ -69,8 +69,12 @@
   For convenience, the definition of \rvsi{} specifies the bounds
   $k_1$, $k_2$, and $k_3$ globally w.r.t a history.
 
-  However, they can be easily generalized to support dynamic bounds per transaction
-  or even w.r.t each individual read operation or every pair of them.
+  \vspace{0.80cm}
+  They can be easily generalized to support dynamic bounds 
+  \begin{itemize}
+    \item per transaction
+    \item even w.r.t each individual read operation or every pair of them.
+  \end{itemize}
 \end{frame}
 %%%%%%%%%%%%%%%
 
@@ -164,6 +168,20 @@
   Atomicity of the commit-timestamps:
 
   \fignocaption{width = 0.70\textwidth}{figs/rvsi-atomic-cts.pdf}
+\end{frame}
+%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%
+\begin{frame}{}
+  All nodes are with the same configuration: 
+  \begin{itemize}
+    \item a single CPU 
+    \item 2048MB main memory 
+    \item 2Mbps network
+  \end{itemize}
+
+  \vspace{0.80cm}
+  Sufficient for evaluating the transaction abort rates (not for performance)
 \end{frame}
 %%%%%%%%%%%%%%%
 
